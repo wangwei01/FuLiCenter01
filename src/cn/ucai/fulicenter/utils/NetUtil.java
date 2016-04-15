@@ -282,8 +282,6 @@ public final class NetUtil {
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_UPLOAD_LOCATION));
 		params.add(new BasicNameValuePair(I.User.USER_NAME, user.getUserName()));
-		params.add(new BasicNameValuePair(I.User.LATITUDE, user.getLatitude()+ ""));
-		params.add(new BasicNameValuePair(I.User.LONGITUDE, user.getLongitude()+ ""));
 		params.add(new BasicNameValuePair(I.User.ID, user.getId() + ""));
 		try {
 			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
