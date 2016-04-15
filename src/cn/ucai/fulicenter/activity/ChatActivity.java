@@ -93,7 +93,7 @@ import java.util.Map;
 
 import cn.ucai.fulicenter.DemoHXSDKHelper;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.adapter.ExpressionAdapter;
 import cn.ucai.fulicenter.adapter.ExpressionPagerAdapter;
 import cn.ucai.fulicenter.adapter.MessageAdapter;
@@ -105,7 +105,7 @@ import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.domain.RobotUser;
 import cn.ucai.fulicenter.utils.CommonUtils;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.ImageUtils;
 import cn.ucai.fulicenter.utils.SmileUtils;
 import cn.ucai.fulicenter.utils.UserUtils;
@@ -518,7 +518,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
    public static ArrayList<UserBean> mcurrentmembers;
 
     protected void onGroupViewCreation() {
-        HashMap<String, ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+        HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
         ArrayList<UserBean> members = groupMembers.get(toChatUsername);
         if (members == null) {
             try {
@@ -553,10 +553,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
             @Override
             public void onResponse(UserBean[] userBeen) {
                 if (userBeen != null) {
-                    HashMap<String, ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+                    HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
                     mcurrentmembers = groupMembers.get(groupid);
                     ArrayList<UserBean> userBeen1 = Utils.array2List(userBeen);
-                   // UserBean user = SuperWeChatApplication.getInstance().getUser();
+                   // UserBean user = FuLiCenterApplication.getInstance().getUser();
                     if (mcurrentmembers == null) {
                         mcurrentmembers = new ArrayList<>();
                         groupMembers.put(groupid, mcurrentmembers);
@@ -898,7 +898,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
             return;
         }
 
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), SuperWeChatApplication.getInstance().getUserName()
+        cameraFile = new File(PathUtil.getInstance().getImagePath(), FuLiCenterApplication.getInstance().getUserName()
                 + System.currentTimeMillis() + ".jpg");
         cameraFile.getParentFile().mkdirs();
         startActivityForResult(

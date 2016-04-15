@@ -27,10 +27,10 @@ import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.RequestManager;
 
-public class SuperWeChatApplication extends Application {
+public class FuLiCenterApplication extends Application {
 	public static String SERVER_ROOT = "http://10.0.2.2:8080/SuperQQ4Server/Server";
 	public static Context applicationContext;
-	private static SuperWeChatApplication instance;
+	private static FuLiCenterApplication instance;
 	// login user name
 	public final String PREF_USERNAME = "username";
 	
@@ -77,7 +77,7 @@ public class SuperWeChatApplication extends Application {
 		}
 	}
 
-	public static SuperWeChatApplication getInstance() {
+	public static FuLiCenterApplication getInstance() {
 		return instance;
 	}
  

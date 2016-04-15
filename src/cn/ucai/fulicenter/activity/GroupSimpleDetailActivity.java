@@ -33,7 +33,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 
 public class GroupSimpleDetailActivity extends BaseActivity {

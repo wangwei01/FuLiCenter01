@@ -42,7 +42,7 @@ import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.db.InviteMessgeDao;
 import cn.ucai.fulicenter.domain.InviteMessage;
 import cn.ucai.fulicenter.domain.InviteMessage.InviteMesageStatus;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 
 public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {

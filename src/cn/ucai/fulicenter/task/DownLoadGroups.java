@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.activity.BaseActivity;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 
 /**
  * Created by sks on 2016/4/7.
@@ -53,7 +53,7 @@ public class DownLoadGroups extends BaseActivity {
                     return;
                 }
                 List<GroupBean> list = Arrays.asList(groupArray);
-                SuperWeChatApplication instance = SuperWeChatApplication.getInstance();
+                FuLiCenterApplication instance = FuLiCenterApplication.getInstance();
                 ArrayList<GroupBean> groups = new ArrayList<GroupBean>(list);
                 instance.setGroupList(groups);
                 Intent intent = new Intent("download_groups");

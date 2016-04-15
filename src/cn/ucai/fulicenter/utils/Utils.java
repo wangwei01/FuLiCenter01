@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.bean.UserBean;
 
 /**
@@ -63,14 +63,14 @@ public class Utils {
         ArrayList<UserBean> userList = null;
         switch (chatType) {
             case GroupChat://群聊
-                HashMap<String,ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+                HashMap<String,ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
                 //获取指定groupId的群聊成员集合
                 userList = groupMembers.get(groupId);
                 break;
             case ChatRoom:
                 break;
             default://单聊
-                userList = SuperWeChatApplication.getInstance().getContactList();
+                userList = FuLiCenterApplication.getInstance().getContactList();
                 break;
         }
         //获取发送消息者
@@ -84,5 +84,14 @@ public class Utils {
             return userList.get(id);
         }
         return null;
+    }
+
+    public static int px2dp(Context context,int px) {
+        int  density = (int) context.getResources().getDisplayMetrics().density;
+        return px / density;
+    }
+    public static int dp2px(Context context,int dp) {
+        int  density = (int) context.getResources().getDisplayMetrics().density;
+        return density/dp;
     }
 }

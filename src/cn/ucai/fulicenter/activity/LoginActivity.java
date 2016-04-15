@@ -42,8 +42,8 @@ import java.util.Map;
 
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
@@ -57,7 +57,7 @@ import cn.ucai.fulicenter.task.DownLoadContactTask;
 import cn.ucai.fulicenter.task.DownLoadGroups;
 import cn.ucai.fulicenter.task.DownLoadPublicGroupTask;
 import cn.ucai.fulicenter.utils.CommonUtils;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.MD5;
 import cn.ucai.fulicenter.utils.NetUtil;
 import cn.ucai.fulicenter.utils.Utils;
@@ -99,8 +99,8 @@ public class LoginActivity extends BaseActivity {
         mContext = this;
         setListener();
 
-        if (SuperWeChatApplication.getInstance().getUserName() != null) {
-            usernameEditText.setText(SuperWeChatApplication.getInstance().getUserName());
+        if (FuLiCenterApplication.getInstance().getUserName() != null) {
+            usernameEditText.setText(FuLiCenterApplication.getInstance().getUserName());
         }
     }
 
@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 serverUrl = etServerUrl.getText().toString();
                                 sp.edit().putString("url", serverUrl).commit();
-                                SuperWeChatApplication.SERVER_ROOT = serverUrl + ":8080/SuperQQ4Server/Server";
+                                FuLiCenterApplication.SERVER_ROOT = serverUrl + ":8080/SuperQQ4Server/Server";
                             }
                         })
                         .setNegativeButton("取消", null);
@@ -205,8 +205,8 @@ public class LoginActivity extends BaseActivity {
     private void loginSuccess() {
         Log.i("main", "5");
         // 登陆成功，保存用户名密码
-        SuperWeChatApplication.getInstance().setUserName(currentUsername);
-        SuperWeChatApplication.getInstance().setPassword(currentPassword);
+        FuLiCenterApplication.getInstance().setUserName(currentUsername);
+        FuLiCenterApplication.getInstance().setPassword(currentPassword);
 
         try {
             // ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
@@ -223,7 +223,7 @@ public class LoginActivity extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    String avatar = SuperWeChatApplication.getInstance().getUser().getAvatar();
+                    String avatar = FuLiCenterApplication.getInstance().getUser().getAvatar();
                     File file = OnSetAvatarListener.getAvatarFile(mContext, avatar);
                     NetUtil.downloadAvatar(file, "user_avatar", avatar);
                 }
@@ -259,7 +259,7 @@ public class LoginActivity extends BaseActivity {
         }
         // 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
         boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(
-                SuperWeChatApplication.currentUserNick.trim());
+                FuLiCenterApplication.currentUserNick.trim());
         if (!updatenick) {
             Log.e("LoginActivity", "update current user nick fail");
         }
@@ -325,7 +325,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void saveUser(UserBean user) {
-        SuperWeChatApplication instance = SuperWeChatApplication.getInstance();
+        FuLiCenterApplication instance = FuLiCenterApplication.getInstance();
         instance.setUser(user);
         instance.setUserName(currentUsername);
         instance.setPassword(currentPassword);

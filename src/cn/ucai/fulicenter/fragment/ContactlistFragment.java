@@ -57,8 +57,8 @@ import java.util.List;
 
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.activity.AddContactActivity;
 import cn.ucai.fulicenter.activity.ChatActivity;
 import cn.ucai.fulicenter.activity.GroupsActivity;
@@ -76,7 +76,7 @@ import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.db.EMUserDao;
 import cn.ucai.fulicenter.db.InviteMessgeDao;
 import cn.ucai.fulicenter.domain.User;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 import cn.ucai.fulicenter.widget.Sidebar;
 
@@ -403,9 +403,9 @@ public class ContactlistFragment extends Fragment {
                     });
 
                     //个人写的删除好友代码
-                    ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
-                    HashMap<String, UserBean> userList = SuperWeChatApplication.getInstance().getUserList();
-                    HashMap<Integer, ContactBean> contacts = SuperWeChatApplication.getInstance().getContacts();
+                    ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
+                    HashMap<String, UserBean> userList = FuLiCenterApplication.getInstance().getUserList();
+                    HashMap<Integer, ContactBean> contacts = FuLiCenterApplication.getInstance().getContacts();
                     ArrayList<UserBean> deleteContactsList = new ArrayList<UserBean>();
                     ArrayList<ContactBean> deleteContact = new ArrayList<ContactBean>();
                     for (UserBean contactuser : contactList) {
@@ -554,7 +554,7 @@ public class ContactlistFragment extends Fragment {
         }
         initContactList();
         //获取本地好友列表
-        Map<String, UserBean> users = SuperWeChatApplication.getInstance().getUserList();
+        Map<String, UserBean> users = FuLiCenterApplication.getInstance().getUserList();
         Iterator<Entry<String, UserBean>> iterator = users.entrySet().iterator();
         while (iterator.hasNext()) {
             Entry<String, UserBean> entry = iterator.next();
@@ -628,7 +628,7 @@ public class ContactlistFragment extends Fragment {
 
 
     private void initContactList() {
-        ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
+        ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
         Log.e(TAG, "contactList" + contactList.size());
         Log.e(TAG, "mcontactList" + mcontactList.size());
         mcontactList.clear();

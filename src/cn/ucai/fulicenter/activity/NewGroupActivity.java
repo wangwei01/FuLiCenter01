@@ -32,13 +32,13 @@ import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.exceptions.EaseMobException;
 
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.listener.OnSetAvatarListener;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.NetUtil;
 import cn.ucai.fulicenter.utils.Utils;
 
@@ -181,7 +181,7 @@ public class NewGroupActivity extends BaseActivity {
                             for (String membername : members) {
                                 sbmembers.append(membername).append(",");
                             }
-                            String userName = SuperWeChatApplication.getInstance().getUserName();
+                            String userName = FuLiCenterApplication.getInstance().getUserName();
                             sbmembers.append(userName);
 
                             String groupId = null;

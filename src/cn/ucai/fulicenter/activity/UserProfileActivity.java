@@ -29,7 +29,7 @@ import java.io.ByteArrayOutputStream;
 
 import cn.ucai.fulicenter.DemoHXSDKHelper;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.domain.User;
 import cn.ucai.fulicenter.utils.UserUtils;
@@ -68,7 +68,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 	private void initListener() {
 		Intent intent = getIntent();
 		String username = intent.getStringExtra("username");
-		String currentUserName = SuperWeChatApplication.getInstance().getUserName();
+		String currentUserName = FuLiCenterApplication.getInstance().getUserName();
 		boolean enableUpdate = intent.getBooleanExtra("setting", false);
 		if (enableUpdate) {
 			headPhotoUpdate.setVisibility(View.VISIBLE);

@@ -8,12 +8,12 @@ import com.android.volley.Response;
 
 import java.util.HashMap;
 
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.activity.BaseActivity;
 import cn.ucai.fulicenter.bean.ContactBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 
 /**
  * Created by sks on 2016/4/7.
@@ -62,7 +62,7 @@ public class DownLoadContactTask extends BaseActivity {
                 for (ContactBean contact : contacts) {
                     map.put(contact.getCuid(), contact);
                 }
-                SuperWeChatApplication instance = SuperWeChatApplication.getInstance();
+                FuLiCenterApplication instance = FuLiCenterApplication.getInstance();
                 HashMap<Integer,ContactBean> contactMap=instance.getContacts();
                 contactMap.putAll(map);
                 Intent intent = new Intent("update_contact");

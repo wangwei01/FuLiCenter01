@@ -9,12 +9,12 @@ import com.android.volley.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.activity.BaseActivity;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.Utils;
 
 /**
@@ -63,13 +63,13 @@ public class DownLoadContactListTask extends BaseActivity {
                 //将数组转换为集合
                 ArrayList<UserBean> userList= Utils.array2List(userArray);
                 //获取已添加的所有联系人的集合
-                ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
+                ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
                 //将新下载的数据添加到原联系人集合中
                 contactList.clear();
                 contactList.addAll(userList);
 
 
-                HashMap<String, UserBean> userList1 = SuperWeChatApplication.getInstance().getUserList();
+                HashMap<String, UserBean> userList1 = FuLiCenterApplication.getInstance().getUserList();
                 HashMap<String, UserBean> userMap = new HashMap<>();
                 for (UserBean userBean : userArray) {
                     userMap.put(userBean.getUserName(), userBean);

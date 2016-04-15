@@ -15,8 +15,9 @@ import java.util.HashMap;
 
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
+import cn.ucai.fulicenter.FuLiCenterApplication;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.activity.ChatActivity;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.GroupBean;
@@ -47,7 +48,7 @@ public class UserUtils {
 
 
     public static UserBean getUserBeanInfo(String username) {
-        UserBean user = SuperWeChatApplication.getInstance().getUserList().get(username);
+        UserBean user = FuLiCenterApplication.getInstance().getUserList().get(username);
         if (user == null) {
             user = new UserBean(username);
         }
@@ -61,7 +62,7 @@ public class UserUtils {
     }
 
     public static GroupBean getGroupBeanInfo(String groupname) {
-        ArrayList<GroupBean> groupList = SuperWeChatApplication.getInstance().getGroupList();
+        ArrayList<GroupBean> groupList = FuLiCenterApplication.getInstance().getGroupList();
         for (GroupBean groupBean : groupList) {
             if (groupBean.getGroupId().equals(groupname)) {
                 return groupBean;
@@ -150,7 +151,7 @@ public class UserUtils {
     }
 
     public static void setCurrentUserBeanAvatar(NetworkImageView imageView) {
-        UserBean user = SuperWeChatApplication.getInstance().getUser();
+        UserBean user = FuLiCenterApplication.getInstance().getUser();
         if (user != null && user.getAvatar() != null) {
             imageView.setImageUrl(I.DOWNLOAD_AVATAR_URL + user.getAvatar(), RequestManager.getImageLoader());
         } else {
@@ -184,7 +185,7 @@ public class UserUtils {
 
     public static UserBean getGroupMemberInfo(String groupid, String username) {
 
-        HashMap<String, ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+        HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
         ArrayList<UserBean> userBeenList = groupMembers.get(groupid);
         if (userBeenList != null) {
             for (UserBean userBean : userBeenList) {
@@ -240,7 +241,7 @@ public class UserUtils {
     }
 
     public static void setCurrentUserBeanNick(TextView textView) {
-        UserBean user = SuperWeChatApplication.getInstance().getUser();
+        UserBean user = FuLiCenterApplication.getInstance().getUser();
         if (textView != null) {
             textView.setText(user.getNick());
         }

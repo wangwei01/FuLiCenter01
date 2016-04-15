@@ -48,15 +48,15 @@ import com.easemob.util.NetUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.MessageBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.data.RequestManager;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 import cn.ucai.fulicenter.widget.ExpandGridView;
 
@@ -114,9 +114,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
         groupId = getIntent().getStringExtra("groupId");
         group = EMGroupManager.getInstance().getGroup(groupId);
 
-        mMemberList = SuperWeChatApplication.getInstance().getGroupMembers().get(groupId);
+        mMemberList = FuLiCenterApplication.getInstance().getGroupMembers().get(groupId);
 
-        ArrayList<GroupBean> groupList = SuperWeChatApplication.getInstance().getGroupList();
+        ArrayList<GroupBean> groupList = FuLiCenterApplication.getInstance().getGroupList();
         for (GroupBean groupBean : groupList) {
             if (groupId.equals(groupBean.getGroupId())) {
                 mGroup = groupBean;
@@ -367,7 +367,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    String username = SuperWeChatApplication.getInstance().getUserName();
+                    String username = FuLiCenterApplication.getInstance().getUserName();
                     String path = new ApiParams().with(I.Group.GROUP_NAME, group.getGroupName())
                             .with(I.Group.MEMBERS, username)
                             .getRequestUrl(I.REQUEST_DELETE_GROUP_MEMBER);
@@ -459,7 +459,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
                         @Override
                         public void onResponse(MessageBean messageBean) {
                             if (messageBean.isSuccess()) {
-                              //  ArrayList<UserBean> contactlist = SuperWeChatApplication.getInstance().getContactList();
+                              //  ArrayList<UserBean> contactlist = FuLiCenterApplication.getInstance().getContactList();
                                 for (int i = 0; i < newmembers.length; i++) {
                                     UserBean user = new UserBean(newmembers[i]);
                                     mMemberList.add(user);

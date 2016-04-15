@@ -35,7 +35,7 @@ import java.util.List;
 
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.adapter.ContactAdapter;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.widget.Sidebar;
@@ -68,7 +68,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 			exitingMembers = new ArrayList<String>();
 		// 获取好友列表
 		final ArrayList<UserBean> alluserList = new ArrayList<UserBean>();
-		for (UserBean user : SuperWeChatApplication.getInstance().getUserList().values()) {
+		for (UserBean user : FuLiCenterApplication.getInstance().getUserList().values()) {
 			if (!user.getUserName().equals(Constant.NEW_FRIENDS_USERNAME) & !user.getUserName().equals(Constant.GROUP_USERNAME) )
 				alluserList.add(user);
 		}

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import cn.ucai.fulicenter.bean.UserBean;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 
 /**
  * Created by sks on 2016/4/5.

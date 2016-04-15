@@ -32,12 +32,12 @@ import com.easemob.chat.EMContactManager;
 
 import java.util.ArrayList;
 
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 
 public class AddContactActivity extends BaseActivity {
@@ -97,8 +97,8 @@ public class AddContactActivity extends BaseActivity {
                     startActivity(new Intent(mContext, AlertDialog.class).putExtra("msg", st));
                     return;
                 }
-                if (SuperWeChatApplication.getInstance().getUserName().equals(name)) {
-                    Log.e(TAG, "setSearchButtonListener" + SuperWeChatApplication.getInstance().getUserName());
+                if (FuLiCenterApplication.getInstance().getUserName().equals(name)) {
+                    Log.e(TAG, "setSearchButtonListener" + FuLiCenterApplication.getInstance().getUserName());
                     String str = getString(R.string.not_add_myself);
                     startActivity(new Intent(mContext, AlertDialog.class).putExtra("msg", str));
                     return;
@@ -125,7 +125,7 @@ public class AddContactActivity extends BaseActivity {
             public void onResponse(UserBean userBean) {
                 if (userBean != null) {
                     mNoting.setVisibility(View.GONE);
-                    ArrayList<UserBean> users = SuperWeChatApplication.getInstance().getContactList();
+                    ArrayList<UserBean> users = FuLiCenterApplication.getInstance().getContactList();
                     if (users.contains(userBean)) {
                         startActivity(new Intent(mContext, UserProfileActivity.class).putExtra("username", userBean.getUserName()));
                     } else {
@@ -149,7 +149,7 @@ public class AddContactActivity extends BaseActivity {
             public void onClick(View v) {
 
 
-//                if (SuperWeChatApplication.getInstance().getUserList().containsKey(nameText.getText().toString())) {
+//                if (FuLiCenterApplication.getInstance().getUserList().containsKey(nameText.getText().toString())) {
 //                    //提示已在好友列表中，无需添加
 //                    if (EMContactManager.getInstance().getBlackListUsernames().contains(nameText.getText().toString())) {
 //                        startActivity(new Intent(mContext, AlertDialog.class).putExtra("msg", "此用户已是你好友(被拉黑状态)，从黑名单列表中移出即可"));

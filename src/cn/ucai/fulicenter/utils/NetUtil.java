@@ -27,8 +27,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.ucai.fulicenter.FuLiCenterApplication;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.bean.ContactBean;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.MessageBean;
@@ -56,7 +57,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.User.PASSWORD, user.getPassword()));
 
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT,
 					params, HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			MessageBean msg;
@@ -85,7 +86,7 @@ public final class NetUtil {
 	public static boolean uploadAvatar(Activity activity, String avatarType,
 			String userName) throws Exception {
 		HttpClient client = new DefaultHttpClient();
-		String url=SuperWeChatApplication.SERVER_ROOT+"?"+I.KEY_REQUEST+"="+I.REQUEST_UPLOAD_AVATAR
+		String url= FuLiCenterApplication.SERVER_ROOT+"?"+I.KEY_REQUEST+"="+I.REQUEST_UPLOAD_AVATAR
 				+"&"+I.User.USER_NAME+"="+userName
 				+"&"+I.AVATAR_TYPE+"="+avatarType;
 		HttpPost post = new HttpPost(url);
@@ -124,7 +125,7 @@ public final class NetUtil {
 				ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 				params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DOWNLOAD_AVATAR));
 				params.add(new BasicNameValuePair(I.User.AVATAR, avatar));
-				InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
+				InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
 				Bitmap bmpAvatar = BitmapFactory.decodeStream(in);
 				OutputStream out = new FileOutputStream(file);
 				if(null!=bmpAvatar){
@@ -164,9 +165,9 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_LOGIN));
 		params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
 		params.add(new BasicNameValuePair(I.User.PASSWORD, password));
-		InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+		InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 				HttpUtils.METHOD_GET);
-		Log.e("main","SERVER_ROOT="+SuperWeChatApplication.SERVER_ROOT);
+		Log.e("main","SERVER_ROOT="+ FuLiCenterApplication.SERVER_ROOT);
 		ObjectMapper om = new ObjectMapper();
 		UserBean user = om.readValue(in, UserBean.class);
 		return user;
@@ -189,7 +190,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
 		params.add(new BasicNameValuePair(I.Contact.NAME, name));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			ContactBean contact = om.readValue(in, ContactBean.class);
@@ -224,7 +225,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.Contact.MYUID, myuid + ""));
 		params.add(new BasicNameValuePair(I.Contact.CUID, cuid + ""));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			Boolean isSuccess = om.readValue(in, Boolean.class);
@@ -251,7 +252,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_FIND_USER));
 		params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			UserBean user = om.readValue(in, UserBean.class);
@@ -284,7 +285,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.User.USER_NAME, user.getUserName()));
 		params.add(new BasicNameValuePair(I.User.ID, user.getId() + ""));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			msg = om.readValue(in, MessageBean.class);
@@ -313,7 +314,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.PAGE_ID, pageId + ""));
 		params.add(new BasicNameValuePair(I.PAGE_SIZE, pageSize + ""));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
             if(in!=null){
@@ -357,7 +358,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		params.add(new BasicNameValuePair(I.Group.MEMBERS, newGroupMembers.toString()));
 		try {
-			InputStream in=HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
+			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			msg = om.readValue(in, MessageBean.class);
 			return msg.isSuccess();
@@ -382,8 +383,8 @@ public final class NetUtil {
      * @param group：群名
      */
     public static boolean createGroup(GroupBean group) {
-        MessageBean msg=new MessageBean(false, SuperWeChatApplication.getInstance().getResources().getString(R.string.Create_groups_Failed));
-        String url=SuperWeChatApplication.SERVER_ROOT+"?"+I.KEY_REQUEST+"="+I.REQUEST_CREATE_GROUP;
+        MessageBean msg=new MessageBean(false, FuLiCenterApplication.getInstance().getResources().getString(R.string.Create_groups_Failed));
+        String url= FuLiCenterApplication.SERVER_ROOT+"?"+I.KEY_REQUEST+"="+I.REQUEST_CREATE_GROUP;
         HttpClient client=new DefaultHttpClient();
         try {
             HttpPost post=new HttpPost(url);
@@ -426,7 +427,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
 		try {
-			InputStream in=HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
+			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			GroupBean group=om.readValue(in, GroupBean.class);
 			return group;
@@ -457,7 +458,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		params.add(new BasicNameValuePair(I.Group.NEW_NAME, groupNewName));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			MessageBean msg = om.readValue(in, MessageBean.class);
@@ -488,7 +489,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DOWNLOAD_GROUP_MEMBERS));
 		params.add(new BasicNameValuePair(I.Group.GROUP_ID, groupId));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			UserBean[] userArray = om.readValue(in, UserBean[].class);
@@ -527,7 +528,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			Boolean isSuccess = om.readValue(in, Boolean.class);
@@ -558,7 +559,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_DELETE_GROUP));
 		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 				HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			msg = om.readValue(in, MessageBean.class);
@@ -589,7 +590,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DOWNLOAD_GROUPS));
 		params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
 		try {
-			InputStream in=HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
+			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 			GroupBean[] groupArray = om.readValue(in, GroupBean[].class);
 			if(groupArray==null){
@@ -625,7 +626,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.PAGE_ID, ""+pageId));
 		params.add(new BasicNameValuePair(I.PAGE_SIZE, ""+pageSize));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
 			ObjectMapper om=new ObjectMapper();
 			GroupBean[] groups = om.readValue(in, GroupBean[].class);
 			if(groups!=null){
@@ -649,14 +650,14 @@ public final class NetUtil {
 	/**
 	 * 下载联系人->HashMap<Integer,ContactBean>
 	 */
-	public static boolean downloadContacts(SuperWeChatApplication instance,String userName,int pageId,int pageSize){
+	public static boolean downloadContacts(FuLiCenterApplication instance, String userName, int pageId, int pageSize){
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DOWNLOAD_CONTACTS));
 		params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
 		params.add(new BasicNameValuePair(I.PAGE_ID, pageId + ""));
 		params.add(new BasicNameValuePair(I.PAGE_SIZE, pageSize + ""));
 		try {
-			InputStream in=HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
+			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
 //			Log.e("main","in="+in.toString());
 			ContactBean[] contacts = om.readValue(in, ContactBean[].class);
@@ -700,7 +701,7 @@ public final class NetUtil {
 		params.add(new BasicNameValuePair(I.PAGE_ID, pageId + ""));
 		params.add(new BasicNameValuePair(I.PAGE_SIZE, pageSize + ""));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
 //			if(in!=null){
 //				byte b[] = new byte[1000];
 //				int c = in.read(b);
@@ -718,11 +719,11 @@ public final class NetUtil {
 			ArrayList<UserBean> userList=Utils.array2List(userArray);
             Log.e(TAG,"userList="+userList.size());
 			//获取已添加的所有联系人的集合
-			ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
-            Log.e(TAG,"getInstance().getContactList()="+SuperWeChatApplication.getInstance().getContactList().size());
+			ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
+            Log.e(TAG,"getInstance().getContactList()="+ FuLiCenterApplication.getInstance().getContactList().size());
 			//将新下载的数据添加到原联系人集合中
 			contactList.addAll(userList);
-            Log.e(TAG,"getInstance().getContactList()="+SuperWeChatApplication.getInstance().getContactList().size());
+            Log.e(TAG,"getInstance().getContactList()="+ FuLiCenterApplication.getInstance().getContactList().size());
 			return true;
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
@@ -746,7 +747,7 @@ public final class NetUtil {
 		ArrayList<BasicNameValuePair> params=new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_SERVERSTATUS));
 		try {
-			InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
+			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
 			ObjectMapper om=new ObjectMapper();
 			msg = om.readValue(in, MessageBean.class);
 		} catch (IllegalStateException e) {
@@ -777,7 +778,7 @@ public final class NetUtil {
         params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_UNREGISTER));
         params.add(new BasicNameValuePair(I.User.USER_NAME, userName));
         try {
-            InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
+            InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
             ObjectMapper om=new ObjectMapper();
             msg = om.readValue(in, MessageBean.class);
         } catch (IllegalStateException e) {
@@ -808,7 +809,7 @@ public final class NetUtil {
         params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_FIND_GROUP));
         params.add(new BasicNameValuePair(I.Group.NAME, groupName));
         try {
-            InputStream in = HttpUtils.getInputStream(SuperWeChatApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
+            InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
             ObjectMapper om=new ObjectMapper();
             GroupBean group = om.readValue(in, GroupBean.class);
             return group;
@@ -828,13 +829,13 @@ public final class NetUtil {
     }
 //
 //	public static boolean isServerConnectioned(){
-//		final String st2 = SuperWeChatApplication.applicationContext.getResources().getString(R.string.the_current_network);
+//		final String st2 = FuLiCenterApplication.applicationContext.getResources().getString(R.string.the_current_network);
 //		//添加本地服务器连接监听
 //		boolean localConnectioned = NetUtil.getServerStatus().isSuccess();
 //		Log.e("main", "MainActivity.MyConnectionListener.localConnectioned=" + localConnectioned);
 //		if (!localConnectioned) {
 //			Log.e("main", "MainActivity.MyConnectionListener.localConnectioned is false,show the popu");
-//			Toast.makeText(SuperWeChatApplication.applicationContext,st2,Toast.LENGTH_LONG).show();
+//			Toast.makeText(FuLiCenterApplication.applicationContext,st2,Toast.LENGTH_LONG).show();
 //		}
 //		return localConnectioned;
 //	}

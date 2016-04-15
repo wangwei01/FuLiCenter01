@@ -36,7 +36,7 @@ import com.easemob.util.EMLog;
 import java.util.ArrayList;
 
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.adapter.GroupAdapter;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.GroupBean;
@@ -95,7 +95,7 @@ public class GroupsActivity extends BaseActivity {
 		initBroadCastReceiver();
 		instance = this;
 		inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		grouplist = SuperWeChatApplication.getInstance().getGroupList();
+		grouplist = FuLiCenterApplication.getInstance().getGroupList();
 		groupListView = (ListView) findViewById(R.id.list);
 
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
@@ -197,7 +197,7 @@ public class GroupsActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (groupAdapter.getCount() == 3 && intent.getAction().equals("download_groups")) {
-				ArrayList<GroupBean> groupList = SuperWeChatApplication.getInstance().getGroupList();
+				ArrayList<GroupBean> groupList = FuLiCenterApplication.getInstance().getGroupList();
 				if (!groupList.containsAll(groupList)) {
 					groupAdapter.initList(groupList);
 				}
@@ -210,7 +210,7 @@ public class GroupsActivity extends BaseActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		grouplist = SuperWeChatApplication.getInstance().getGroupList();
+		grouplist = FuLiCenterApplication.getInstance().getGroupList();
 		groupAdapter = new GroupAdapter(this,grouplist);
 		groupListView.setAdapter(groupAdapter);
 		groupAdapter.notifyDataSetChanged();
@@ -231,7 +231,7 @@ public class GroupsActivity extends BaseActivity {
 
 	public void refresh() {
 		if (groupListView != null && groupAdapter != null) {
-			grouplist = SuperWeChatApplication.getInstance().getGroupList();
+			grouplist = FuLiCenterApplication.getInstance().getGroupList();
 			groupAdapter = new GroupAdapter(GroupsActivity.this,grouplist);
 			groupListView.setAdapter(groupAdapter);
 			groupAdapter.notifyDataSetChanged();

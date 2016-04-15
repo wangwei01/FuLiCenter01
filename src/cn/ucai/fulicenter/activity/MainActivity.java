@@ -64,8 +64,8 @@ import java.util.UUID;
 
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.ContactBean;
 import cn.ucai.fulicenter.bean.GroupBean;
@@ -81,7 +81,7 @@ import cn.ucai.fulicenter.fragment.ChatAllHistoryFragment;
 import cn.ucai.fulicenter.fragment.ContactlistFragment;
 import cn.ucai.fulicenter.fragment.SettingsFragment;
 import cn.ucai.fulicenter.utils.CommonUtils;
-import cn.ucai.fulicenter.utils.I;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.Utils;
 
 public class MainActivity extends BaseActivity implements EMEventListener {
@@ -531,7 +531,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         public void onContactAdded(List<String> usernameList) {
             // 保存增加的联系人
             Map<String, User> localUsers = ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList();
-            ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
+            ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
             Map<String, User> toAddUsers = new HashMap<String, User>();
             ArrayList<String> toaddUsernames = new ArrayList<>();
             boolean isAdd = false;
@@ -556,7 +556,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 if (isAdd) {
                     try {
                         String path = new ApiParams()
-                                .with(I.User.USER_NAME, SuperWeChatApplication.getInstance().getUserName())
+                                .with(I.User.USER_NAME, FuLiCenterApplication.getInstance().getUserName())
                                 .with(I.Contact.NAME, name)
                                 .getRequestUrl(I.REQUEST_ADD_CONTACT);
                         executeRequest(new GsonRequest<ContactBean>(path, ContactBean.class, responseListener(name), errorListener()));
@@ -582,9 +582,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 inviteMessgeDao.deleteMessage(username);
             }
 
-            ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
-            HashMap<String, UserBean> userList = SuperWeChatApplication.getInstance().getUserList();
-            HashMap<Integer, ContactBean> contacts = SuperWeChatApplication.getInstance().getContacts();
+            ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
+            HashMap<String, UserBean> userList = FuLiCenterApplication.getInstance().getUserList();
+            HashMap<Integer, ContactBean> contacts = FuLiCenterApplication.getInstance().getContacts();
             ArrayList<UserBean> deleteContactsList = new ArrayList<UserBean>();
             ArrayList<ContactBean> deleteContact = new ArrayList<ContactBean>();
             for (UserBean contactuser : contactList) {
@@ -700,7 +700,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             @Override
             public void onResponse(ContactBean contactBean) {
                 if (contactBean != null && "ok".equals(contactBean.getResult())) {
-                    HashMap<Integer, ContactBean> contacts = SuperWeChatApplication.getInstance().getContacts();
+                    HashMap<Integer, ContactBean> contacts = FuLiCenterApplication.getInstance().getContacts();
                     contacts.put(contactBean.getMyuid(), contactBean);
                     try {
                         String path = new ApiParams()
@@ -720,8 +720,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             @Override
             public void onResponse(UserBean userBean) {
                 if (userBean != null) {
-                    HashMap<String, UserBean> userList = SuperWeChatApplication.getInstance().getUserList();
-                    ArrayList<UserBean> contactList = SuperWeChatApplication.getInstance().getContactList();
+                    HashMap<String, UserBean> userList = FuLiCenterApplication.getInstance().getUserList();
+                    ArrayList<UserBean> contactList = FuLiCenterApplication.getInstance().getContactList();
                     contactList.add(userBean);
                     userList.put(userBean.getUserName(), userBean);
                     mContext.sendStickyBroadcast(new Intent("update_contact_list"));
@@ -929,7 +929,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             HXSDKHelper.getInstance().getNotifier().viberateAndPlayTone(msg);
 
 
-            UserBean user = SuperWeChatApplication.getInstance().getUser();
+            UserBean user = FuLiCenterApplication.getInstance().getUser();
             try {
                 String path = new ApiParams()
                         .with(I.Group.MEMBERS, user.getUserName())
@@ -964,9 +964,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             @Override
             public void onResponse(GroupBean groupBean) {
                 if (groupBean != null) {
-                    ArrayList<GroupBean> groupList = SuperWeChatApplication.getInstance().getGroupList();
+                    ArrayList<GroupBean> groupList = FuLiCenterApplication.getInstance().getGroupList();
                     groupList.add(groupBean);
-                    HashMap<String, ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+                    HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
                     ArrayList<UserBean> memebers = groupMembers.get(groupBean.getGroupId());
                     if (memebers == null) {
                         try {
@@ -989,10 +989,10 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             public void onResponse(UserBean[] userBeen) {
                 Log.i("main", Arrays.toString(userBeen));
                 if (userBeen != null) {
-                    HashMap<String, ArrayList<UserBean>> groupMembers = SuperWeChatApplication.getInstance().getGroupMembers();
+                    HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
                     ArrayList<UserBean> members = groupMembers.get(groupid);
                     ArrayList<UserBean> userBeen1 = Utils.array2List(userBeen);
-                    UserBean user = SuperWeChatApplication.getInstance().getUser();
+                    UserBean user = FuLiCenterApplication.getInstance().getUser();
                     if (members == null) {
                         members = new ArrayList<>();
                         groupMembers.put(groupid, members);

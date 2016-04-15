@@ -40,7 +40,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.ArrayList;
 
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.SuperWeChatApplication;
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.task.DownLoadPublicGroupTask;
@@ -112,7 +112,7 @@ public class PublicGroupsActivity extends BaseActivity {
                         int lasPos = view.getLastVisiblePosition();
                         if(hasMoreData && !isLoading && lasPos == listView.getCount()-1){
                             pageId++;
-                            UserBean user = SuperWeChatApplication.getInstance().getUser();
+                            UserBean user = FuLiCenterApplication.getInstance().getUser();
                             new DownLoadPublicGroupTask(mContext, user.getUserName(), pageId, pagesize).execute();
                             loadAndShowData();
                         }
@@ -154,7 +154,7 @@ public class PublicGroupsActivity extends BaseActivity {
             public void run() {
                 try {
                     isLoading = true;
-                    final ArrayList<GroupBean> publicGroupList = SuperWeChatApplication.getInstance().getPublicGroupList();
+                    final ArrayList<GroupBean> publicGroupList = FuLiCenterApplication.getInstance().getPublicGroupList();
                     //final EMCursorResult<EMGroupInfo> result = EMGroupManager.getInstance().getPublicGroupsFromServer(pagesize, cursor);
                     //获取group list
                    // final List<EMGroupInfo> returnGroups = result.getData();
