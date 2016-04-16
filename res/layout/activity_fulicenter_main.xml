@@ -31,7 +31,7 @@
 
         <RadioButton
             android:id="@+id/layout_Category"
-            android:text="精品"
+            android:text="分类"
             android:button="@null"
             android:drawableTop="@drawable/selector_menu_item_category"
             style="@style/menu_item_style"
