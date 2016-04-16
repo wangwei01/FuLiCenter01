@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import cn.ucai.fulicenter.bean.ContactBean;
-import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.RequestManager;
 
@@ -132,9 +131,6 @@ public class FuLiCenterApplication extends Application {
 	private ArrayList<UserBean> contactList = new ArrayList<>();
 	private HashMap<String, UserBean> userList = new HashMap<>();
 	private HashMap<Integer, ContactBean> contacts = new HashMap<>();
-	private ArrayList<GroupBean> groupList = new ArrayList<>();
-	private ArrayList<GroupBean> publicGroupList = new ArrayList<>();
-	private HashMap<String, ArrayList<UserBean>> groupMembers = new HashMap<>();
 
 	public UserBean getUser() {
 		return user;
@@ -165,29 +161,5 @@ public class FuLiCenterApplication extends Application {
 
 	public void setContacts(HashMap<Integer, ContactBean> contacts) {
 		this.contacts = contacts;
-	}
-
-	public ArrayList<GroupBean> getGroupList() {
-		return groupList;
-	}
-
-	public void setGroupList(ArrayList<GroupBean> groupList) {
-		this.groupList = groupList;
-	}
-
-	public ArrayList<GroupBean> getPublicGroupList() {
-		return publicGroupList;
-	}
-
-	public void setPublicGroupList(ArrayList<GroupBean> publicGroupList) {
-		this.publicGroupList = publicGroupList;
-	}
-
-	public HashMap<String, ArrayList<UserBean>> getGroupMembers() {
-		return groupMembers;
-	}
-
-	public void setGroupMembers(HashMap<String, ArrayList<UserBean>> groupMembers) {
-		this.groupMembers = groupMembers;
 	}
 }

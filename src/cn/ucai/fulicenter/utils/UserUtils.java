@@ -2,7 +2,6 @@ package cn.ucai.fulicenter.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,15 +9,11 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.easemob.util.HanziToPinyin;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
 import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.activity.ChatActivity;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.GroupBean;
 import cn.ucai.fulicenter.bean.UserBean;
@@ -61,20 +56,8 @@ public class UserUtils {
         return user;
     }
 
-    public static GroupBean getGroupBeanInfo(String groupname) {
-        ArrayList<GroupBean> groupList = FuLiCenterApplication.getInstance().getGroupList();
-        for (GroupBean groupBean : groupList) {
-            if (groupBean.getGroupId().equals(groupname)) {
-                return groupBean;
-            }
-        }
-        return null;
-    }
 
-    public static void setGroupAvatar(String groupname, NetworkImageView imageView) {
-        GroupBean groupBean = getGroupBeanInfo(groupname);
-        setGroupBeanAvatar(groupBean, imageView);
-    }
+
 
 
     public static void setGroupBeanAvatar(GroupBean groupBean, NetworkImageView imageView) {
@@ -105,17 +88,6 @@ public class UserUtils {
         UserBean userBean = getUserBeanInfo(username);
         if (userBean != null && userBean.getAvatar() != null) {
             setavatar(userBean,imageView);
-        } else {
-            for (UserBean userBean1 : ChatActivity.mcurrentmembers) {
-                if (ChatActivity.mcurrentmembers != null) {
-                    Log.i("main", "setUserBeanAvatar" + userBean1.toString());
-                    if (username.equals(userBean1.getUserName())) {
-                        if (userBean1 != null && userBean1.getAvatar() != null) {
-                            setavatar(userBean1, imageView);
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -172,43 +144,11 @@ public class UserUtils {
         }
     }
 
-    public static void setGroupMembersNick(String groupid, String username, TextView textView) {
-        UserBean userBean = getGroupMemberInfo(groupid, username);
-        if (userBean != null) {
-            if (username.equals(userBean.getUserName())) {
-                textView.setText(userBean.getNick());
-            } else {
-                textView.setText(username);
-            }
-        }
-    }
 
-    public static UserBean getGroupMemberInfo(String groupid, String username) {
 
-        HashMap<String, ArrayList<UserBean>> groupMembers = FuLiCenterApplication.getInstance().getGroupMembers();
-        ArrayList<UserBean> userBeenList = groupMembers.get(groupid);
-        if (userBeenList != null) {
-            for (UserBean userBean : userBeenList) {
-             //   Log.i("main","getGroupMemberInfo"+userBean.toString());
-                if (username.equals(userBean.getUserName())) {
-                    return userBean;
-                }
-            }
-        }
-            return null;
-    }
 
-    public static void setGroupMemberNick(String username, TextView textView) {
-        ArrayList<UserBean> mcurrentmembers = ChatActivity.mcurrentmembers;
-        for (UserBean userBean1 : mcurrentmembers) {
-            if (username.equals(userBean1.getUserName())) {
-                if (userBean1!=null) {
-                 //   Log.i("main","setGroupMemberNick"+userBean1.toString());
-                    textView.setText(userBean1.getNick());
-                }
-            }
-        }
-    }
+
+
 
     public static void setUserBeanNick(String username, TextView textView) {
 

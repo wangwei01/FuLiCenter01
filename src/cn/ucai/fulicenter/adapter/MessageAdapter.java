@@ -421,7 +421,7 @@ public class MessageAdapter extends BaseAdapter{
 		    //demo里使用username代码nick
 			UserUtils.setUserNick(message.getFrom(), holder.tv_usernick);
             UserUtils.setUserBeanNick(message.getFrom(),holder.tv_usernick);
-			UserUtils.setGroupMembersNick(username, message.getFrom(), holder.tv_usernick);
+			//UserUtils.setGroupMembersNick(username, message.getFrom(), holder.tv_usernick);
 		}
 		if(message.direct == EMMessage.Direct.SEND){
 			UserUtils.setCurrentUserNick(holder.tv_usernick);
@@ -583,8 +583,8 @@ public class MessageAdapter extends BaseAdapter{
         }else{
 	      //  UserUtils.setUserAvatar(context, message.getFrom(), imageView);
             UserUtils.setUserBeanAvatar(message.getFrom(), imageView);
-			UserBean member = UserUtils.getGroupMemberInfo(username, message.getFrom());
-			UserUtils.setUserBeanAvatar(member,imageView);
+			//UserBean member = UserUtils.getGroupMemberInfo(username, message.getFrom());
+			//UserUtils.setUserBeanAvatar(member,imageView);
 		}
 	    imageView.setOnClickListener(new View.OnClickListener() {
 			

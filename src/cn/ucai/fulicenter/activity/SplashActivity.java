@@ -19,8 +19,6 @@ import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.db.UserDao;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
-import cn.ucai.fulicenter.task.DownLoadGroups;
-import cn.ucai.fulicenter.task.DownLoadPublicGroupTask;
 
 /**
  * 开屏页
@@ -60,8 +58,6 @@ public class SplashActivity extends BaseActivity {
 
 			new DownLoadContactTask(mcontext,username,0,20).execute();
 			new DownLoadContactListTask(mcontext,username,0,20).execute();
-			new DownLoadGroups(mcontext, username).execute();
-			new DownLoadPublicGroupTask(mcontext, username, 0, 15).execute();
 
 		new Thread(new Runnable() {
 			public void run() {

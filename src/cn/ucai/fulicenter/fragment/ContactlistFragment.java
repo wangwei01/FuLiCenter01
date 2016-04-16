@@ -58,14 +58,12 @@ import java.util.List;
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
 import cn.ucai.fulicenter.FuLiCenterApplication;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.activity.AddContactActivity;
 import cn.ucai.fulicenter.activity.ChatActivity;
-import cn.ucai.fulicenter.activity.GroupsActivity;
 import cn.ucai.fulicenter.activity.MainActivity;
 import cn.ucai.fulicenter.activity.NewFriendsMsgActivity;
-import cn.ucai.fulicenter.activity.PublicChatRoomsActivity;
-import cn.ucai.fulicenter.activity.RobotsActivity;
 import cn.ucai.fulicenter.adapter.ContactAdapter;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper.HXSyncListener;
@@ -76,7 +74,6 @@ import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.db.EMUserDao;
 import cn.ucai.fulicenter.db.InviteMessgeDao;
 import cn.ucai.fulicenter.domain.User;
-import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.UserUtils;
 import cn.ucai.fulicenter.widget.Sidebar;
 
@@ -267,16 +264,7 @@ public class ContactlistFragment extends Fragment {
                     User user = ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList().get(Constant.NEW_FRIENDS_USERNAME);
                     user.setUnreadMsgCount(0);
                     startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
-                } else if (Constant.GROUP_USERNAME.equals(username)) {
-                    // 进入群聊列表页面
-                    startActivity(new Intent(getActivity(), GroupsActivity.class));
-                } else if (Constant.CHAT_ROOM.equals(username)) {
-                    //进入聊天室列表页面
-                    startActivity(new Intent(getActivity(), PublicChatRoomsActivity.class));
-                } else if (Constant.CHAT_ROBOT.equals(username)) {
-                    //进入Robot列表页面
-                    startActivity(new Intent(getActivity(), RobotsActivity.class));
-                } else {
+                }  else {
                     // demo中直接进入聊天页面，实际一般是进入用户详情页
                     startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUserName()));
                 }

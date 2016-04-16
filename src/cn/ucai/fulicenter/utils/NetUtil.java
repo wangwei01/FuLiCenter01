@@ -355,8 +355,8 @@ public final class NetUtil {
 
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_ADD_GROUP_MEMBERS));
-		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
-		params.add(new BasicNameValuePair(I.Group.MEMBERS, newGroupMembers.toString()));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
+		//params.add(new BasicNameValuePair(I.Group.MEMBERS, newGroupMembers.toString()));
 		try {
 			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT,params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
@@ -424,8 +424,8 @@ public final class NetUtil {
 	public static GroupBean addGroupMember(String groupName, String userName) {
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_ADD_GROUP_MEMBER));
-		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
-		params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
+		//params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
 		try {
 			InputStream in=HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,HttpUtils.METHOD_GET);
 			ObjectMapper om = new ObjectMapper();
@@ -455,8 +455,8 @@ public final class NetUtil {
 	public static boolean updateGroupName(String groupName, String groupNewName) {
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_UPDATE_GROUP_NAME));
-		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
-		params.add(new BasicNameValuePair(I.Group.NEW_NAME, groupNewName));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
+		//params.add(new BasicNameValuePair(I.Group.NEW_NAME, groupNewName));
 		try {
 			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
@@ -487,7 +487,7 @@ public final class NetUtil {
 	public static ArrayList<UserBean> downloadGroupMembers(String groupId) {
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DOWNLOAD_GROUP_MEMBERS));
-		params.add(new BasicNameValuePair(I.Group.GROUP_ID, groupId));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_ID, groupId));
 		try {
 			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
@@ -525,8 +525,8 @@ public final class NetUtil {
 
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST,I.REQUEST_DELETE_GROUP_MEMBER));
-		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
-		params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
+		//params.add(new BasicNameValuePair(I.Group.MEMBERS, userName));
 		try {
 			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 					HttpUtils.METHOD_GET);
@@ -557,7 +557,7 @@ public final class NetUtil {
 		MessageBean msg=new MessageBean(false, "解散群失败");
 		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 		params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_DELETE_GROUP));
-		params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
+		//params.add(new BasicNameValuePair(I.Group.GROUP_NAME, groupName));
 		try {
 			InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params,
 				HttpUtils.METHOD_GET);
@@ -807,7 +807,7 @@ public final class NetUtil {
 //		}
         ArrayList<BasicNameValuePair> params=new ArrayList<BasicNameValuePair>();
         params.add(new BasicNameValuePair(I.KEY_REQUEST, I.REQUEST_FIND_GROUP));
-        params.add(new BasicNameValuePair(I.Group.NAME, groupName));
+        //params.add(new BasicNameValuePair(I.Group.NAME, groupName));
         try {
             InputStream in = HttpUtils.getInputStream(FuLiCenterApplication.SERVER_ROOT, params, HttpUtils.METHOD_GET);
             ObjectMapper om=new ObjectMapper();

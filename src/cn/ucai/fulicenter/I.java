@@ -194,20 +194,7 @@ public interface I {
         public static final String IS_SHOW_MY_LOCATION = "isShowMyLocation";
     }
 
-    public static class Group {
-        public static final String ID = "id";// 主键
-        public static final String GROUP_ID = "groupId";// 主键
-        public static final String NAME = "name";// 群名
-        public static final String GROUP_NAME = "groupName";// 群名，url中使用
-        public static final String NEW_NAME = "new_name";// 群新名称
-        public static final String AVATAR = "avatar";// 群图标
-        public static final String INTRO = "intro";// 群简介
-        public static final String OWNER = "owner";// 群主账号
-        public static final String IS_PUBLIC = "isPublic";// 是否公开
-        public static final String MODIFIED_TIME = "modifiedTime";// 群信息修改的时间，单位：毫秒
-        public static final String MEMBERS = "members";// 群成员的账号
-        public static final String IS_EXAME = "isExame";// 群成员的账号
-    }
+
     public enum ActionType {
         ACTION_DOWNLOAD, ACTION_PULL_DOWN, ACTION_SCROLL
     }    

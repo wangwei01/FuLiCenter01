@@ -43,6 +43,7 @@ import java.util.Map;
 import cn.ucai.fulicenter.Constant;
 import cn.ucai.fulicenter.DemoHXSDKHelper;
 import cn.ucai.fulicenter.FuLiCenterApplication;
+import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
 import cn.ucai.fulicenter.bean.UserBean;
@@ -54,10 +55,7 @@ import cn.ucai.fulicenter.domain.User;
 import cn.ucai.fulicenter.listener.OnSetAvatarListener;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
-import cn.ucai.fulicenter.task.DownLoadGroups;
-import cn.ucai.fulicenter.task.DownLoadPublicGroupTask;
 import cn.ucai.fulicenter.utils.CommonUtils;
-import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.MD5;
 import cn.ucai.fulicenter.utils.NetUtil;
 import cn.ucai.fulicenter.utils.Utils;
@@ -236,9 +234,6 @@ public class LoginActivity extends BaseActivity {
                     new DownLoadContactTask(mContext, currentUsername, 0, 20).execute();
                     //下载好友列表
                     new DownLoadContactListTask(mContext,currentUsername,0,20).execute();
-                    //下载群组列表
-                    new DownLoadGroups(mContext, currentUsername).execute();
-                    new DownLoadPublicGroupTask(mContext, currentUsername, 0, 15).execute();
 
 
                 }

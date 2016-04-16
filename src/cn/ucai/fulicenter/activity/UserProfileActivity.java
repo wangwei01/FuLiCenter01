@@ -88,7 +88,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 			UserUtils.setUserBeanNick(username, tvNickName);
 			UserUtils.setUserBeanAvatar(username, headAvatar);
 
-			UserUtils.setGroupMemberNick(username, tvNickName);
+			//UserUtils.setGroupMemberNick(username, tvNickName);
 			//asyncFetchUserInfo(username);
 		}
 	}

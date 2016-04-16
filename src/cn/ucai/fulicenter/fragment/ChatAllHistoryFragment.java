@@ -65,7 +65,6 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 	private List<EMConversation> conversationList = new ArrayList<EMConversation>();
 	DownLoadContactListReceiver mdownLoadContactListReceiver;
 	DownLoadContactReceiver mdownLoadContactReceiver;
-	DownLoadGroupsReceiver mdownLoadGroupReceiver;
 
 		
 	@Override
@@ -324,13 +323,6 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 		}
 	}
 
-	class DownLoadGroupsReceiver extends BroadcastReceiver {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			adapter.notifyDataSetChanged();
-		}
-	}
 	private void initBroadcaseReceiver() {
 		mdownLoadContactListReceiver = new DownLoadContactListReceiver();
 		IntentFilter filter = new IntentFilter();
@@ -342,10 +334,6 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 		filter.addAction("update_contact");
 		getActivity().registerReceiver(mdownLoadContactReceiver, filter1);
 
-		mdownLoadGroupReceiver = new DownLoadGroupsReceiver();
-		IntentFilter filter2 = new IntentFilter();
-		filter.addAction("download_groups");
-		getActivity().registerReceiver(mdownLoadGroupReceiver, filter2);
 	}
 
 	@Override
@@ -358,10 +346,6 @@ public class ChatAllHistoryFragment extends Fragment implements View.OnClickList
 		if (mdownLoadContactReceiver != null) {
 			getActivity().unregisterReceiver(mdownLoadContactReceiver);
 			mdownLoadContactReceiver=null;
-		}
-		if (mdownLoadGroupReceiver != null) {
-			getActivity().unregisterReceiver(mdownLoadGroupReceiver);
-			mdownLoadGroupReceiver=null;
 		}
 	}
 }
