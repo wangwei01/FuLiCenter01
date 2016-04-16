@@ -109,20 +109,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        if (savedInstanceState != null && savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED, false)) {
-            // 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
-            // 三个fragment里加的判断同理
-            DemoHXSDKHelper.getInstance().logout(true, null);
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-            return;
-        } else if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false)) {
-            // 防止被T后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
-            // 三个fragment里加的判断同理
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-            return;
-        }
+
         setContentView(R.layout.activity_main);
         initView();
 
@@ -170,30 +157,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     }
 
 
-    static void asyncFetchGroupsFromServer() {
-        HXSDKHelper.getInstance().asyncFetchGroupsFromServer(new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                HXSDKHelper.getInstance().noitifyGroupSyncListeners(true);
-
-                if (HXSDKHelper.getInstance().isContactsSyncedWithServer()) {
-                    HXSDKHelper.getInstance().notifyForRecevingEvents();
-                }
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                HXSDKHelper.getInstance().noitifyGroupSyncListeners(false);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-        });
-    }
 
     static void asyncFetchContactsFromServer() {
         HXSDKHelper.getInstance().asyncFetchContactsFromServer(new EMValueCallBack<List<String>>() {
@@ -277,22 +240,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         });
     }
 
-    static void asyncFetchBlackListFromServer() {
-        HXSDKHelper.getInstance().asyncFetchBlackListFromServer(new EMValueCallBack<List<String>>() {
-
-            @Override
-            public void onSuccess(List<String> value) {
-                EMContactManager.getInstance().saveBlackList(value);
-                HXSDKHelper.getInstance().notifyBlackListSyncListener(true);
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
-                HXSDKHelper.getInstance().notifyBlackListSyncListener(false);
-            }
-
-        });
-    }
 
     /**
      * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
@@ -721,11 +668,10 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         @Override
         public void onConnected() {
-            boolean groupSynced = HXSDKHelper.getInstance().isGroupsSyncedWithServer();
             boolean contactSynced = HXSDKHelper.getInstance().isContactsSyncedWithServer();
 
             // in case group and contact were already synced, we supposed to notify sdk we are ready to receive the events
-            if (groupSynced && contactSynced) {
+            if ( contactSynced) {
                 new Thread() {
                     @Override
                     public void run() {
@@ -733,17 +679,11 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     }
                 }.start();
             } else {
-                if (!groupSynced) {
-                    asyncFetchGroupsFromServer();
-                }
 
                 if (!contactSynced) {
                     asyncFetchContactsFromServer();
                 }
 
-                if (!HXSDKHelper.getInstance().isBlackListSyncedWithServer()) {
-                    asyncFetchBlackListFromServer();
-                }
             }
 
             runOnUiThread(new Runnable() {
