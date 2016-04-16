@@ -27,8 +27,8 @@ import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.RequestManager;
 
 public class FuLiCenterApplication extends Application {
-	public static String SERVER_ROOT = "http://10.0.2.2:8080/SuperQQ4Server/Server";
-	//http://139.196.185.33:8080/FuLiCenterServer/Server
+	//public static String SERVER_ROOT = "http://10.0.2.2:8080/SuperQQ4Server/Server";
+	public static String SERVER_ROOT ="http://139.196.185.33:8080/FuLiCenterServer/Server";
 	public static Context applicationContext;
 	private static FuLiCenterApplication instance;
 	// login user name

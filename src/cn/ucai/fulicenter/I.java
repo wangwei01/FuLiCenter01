@@ -3,8 +3,8 @@ package cn.ucai.fulicenter;
 public interface I {
 
     public static final String AVATAR_PATH = "D:/project/github/SuperWeChat_Database/";
-    public static final String PAGE_ID = "pageId";
-    public static final String PAGE_SIZE = "pageSize";
+    public static final String PAGE_ID = "page_id";
+    public static final String PAGE_SIZE = "page_size";
    public static final String AVATAR_TYPE = "avatarType";
     public static final String FILE_NAME="file_name";
     

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.fragment.NewGoodFragment;
 
 /**
  * Created by sks on 2016/4/16.
@@ -19,12 +20,24 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     int currentindex = -1;
     RadioButton[] mRagioButtonArr;
 
+    NewGoodFragment mNewGoodFragment;
+    NewGoodFragment[] mNewGoodFragmentArr;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_fulicenter_main);
         mRagioButtonArr=new RadioButton[5];
+        mNewGoodFragmentArr = new NewGoodFragment[5];
         initView();
+        initgragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mNewGoodFragment)
+                .show(mNewGoodFragment).commit();
+    }
+
+    private void initgragment() {
+        mNewGoodFragment = new NewGoodFragment();
+        mNewGoodFragmentArr[0] = mNewGoodFragment;
     }
 
 
