@@ -214,9 +214,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
                 HXSDKHelper.getInstance().notifyContactsSyncListener(true);
 
-                if (HXSDKHelper.getInstance().isGroupsSyncedWithServer()) {
-                    HXSDKHelper.getInstance().notifyForRecevingEvents();
-                }
+               
 
                 ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().asyncFetchContactInfosFromServer(usernames, new EMValueCallBack<List<User>>() {
 

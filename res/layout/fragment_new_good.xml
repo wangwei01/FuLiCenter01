@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.ucai.fulicenter.fragment.NewGoodFragment">
+   >
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_new_good"
@@ -11,8 +10,15 @@
         android:background="@color/list_background">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <include layout="@layout/common_refresh_hint" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinnerarr"
+                />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_nowgood"
                 android:layout_width="match_parent"

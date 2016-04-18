@@ -1,6 +1,10 @@
 package cn.ucai.fulicenter.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -21,23 +25,46 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     RadioButton[] mRagioButtonArr;
 
     NewGoodFragment mNewGoodFragment;
-    NewGoodFragment[] mNewGoodFragmentArr;
+    Fragment[] myFragmentArr=new Fragment[5];
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_fulicenter_main);
         mRagioButtonArr=new RadioButton[5];
-        mNewGoodFragmentArr = new NewGoodFragment[5];
+
         initView();
-        initgragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mNewGoodFragment)
+        initFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_contain, mNewGoodFragment)
                 .show(mNewGoodFragment).commit();
     }
 
-    private void initgragment() {
+    private void initFragment() {
         mNewGoodFragment = new NewGoodFragment();
-        mNewGoodFragmentArr[0] = mNewGoodFragment;
+        myFragmentArr[0] = mNewGoodFragment;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_cart_hint, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mi_time_up:
+                break;
+            case R.id.mi_time_down:
+                break;
+            case R.id.mi_price_up:
+                break;
+            case R.id.mi_price_down:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

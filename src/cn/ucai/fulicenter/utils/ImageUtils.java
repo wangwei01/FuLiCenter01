@@ -65,7 +65,7 @@ public class ImageUtils {
 	public static void setNewGoodThumb(String thumb, NetworkImageView imageView) {
 		String url = FuLiCenterApplication.SERVER_ROOT + "?" + I.KEY_REQUEST
 				+"="+ I.REQUEST_DOWNLOAD_NEW_GOOD
-				+ "&" + I.FILE_NAME + "=" + imageView;
+				+ "&" + I.FILE_NAME + "=" + thumb;
 		imageView.setImageUrl(url, RequestManager.getImageLoader());
 		imageView.setDefaultImageResId(R.drawable.nopic);
 		imageView.setErrorImageResId(R.drawable.nopic);

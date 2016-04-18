@@ -17,6 +17,7 @@ package cn.ucai.fulicenter.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,6 +81,7 @@ public class BaseActivity extends FragmentActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Utils.showToast(activity,volleyError.getMessage(), Toast.LENGTH_LONG);
+                Log.e("main",volleyError.getMessage());
             }
         };
     }

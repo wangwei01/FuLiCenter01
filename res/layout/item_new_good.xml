@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/white"
-    android:layout_margin="5dp"
+    android:layout_marginTop="5dp"
     android:weightSum="1"
     android:id="@+id/layout_new_good"
     >
