@@ -1,13 +1,39 @@
+<<<<<<< HEAD
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.ucai.fulicenter.fragment.NewGoodFragment">
+   >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< HEAD
         android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
+=======
+        android:background="@color/list_background">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/common_refresh_hint" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinnerarr"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_nowgood"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习

@@ -55,4 +55,16 @@ public class ImageUtils {
 		}
 		return file.getAbsolutePath();
 	}
+<<<<<<< HEAD
+=======
+
+	public static void setNewGoodThumb(String thumb, NetworkImageView imageView) {
+		String url = FuLiCenterApplication.SERVER_ROOT + "?" + I.KEY_REQUEST
+				+"="+ I.REQUEST_DOWNLOAD_NEW_GOOD
+				+ "&" + I.FILE_NAME + "=" + thumb;
+		imageView.setImageUrl(url, RequestManager.getImageLoader());
+		imageView.setDefaultImageResId(R.drawable.nopic);
+		imageView.setErrorImageResId(R.drawable.nopic);
+	}
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mi_price_up"
+        android:title="价格升序"/>
+    <item android:id="@+id/mi_price_down"
+        android:title="价格降序"/>
+    <item android:id="@+id/mi_time_up"
+        android:title="添加时间升序"/>
+    <item android:id="@+id/mi_time_down"
+        android:title="添加时间升序"/>
+
+</menu>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+=======
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习
 
 </LinearLayout>

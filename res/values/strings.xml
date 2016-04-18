@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     
+=======
+<string-array name="spinnerarr">
+<item>按时间升序</item>
+<item>按时间降序</item>
+<item>按价格升序</item>
+<item>按价格降序</item>
+
+</string-array>
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习
     <string name="app_name">FuLiCenter-AS</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
@@ -104,6 +114,7 @@
     <string name="Group_of_Lord">The group owner</string>
     <string name="Introduction">Brief</string>
     <string name="To_join_the_chat">Join the group</string>
+    <string name="send_message">Send Message</string>
     <string name="login">Login</string>
     <string name="user_name">User name</string>
     <string name="password">Password</string>
@@ -129,12 +140,12 @@
     <string name="Add_a_friend">Let me to be your friend!</string>
     <string name="send_successful">Request was sent, waiting for the peer to accept</string>
     <string name="Request_add_buddy_failure">Request add buddy failure:</string>
-    <string name="Add_buddy_success">add buddy success</string>
     <string name="Network_error">Network error</string>
     <string name="Making_sure_your_location">Making sure your location..</string>
     <string name="please_check">key validation error!Please on AndroidManifest.xml file check the key set</string>
     <string name="expression">[expression]</string>
     <string name="Removed_from_the_failure">Removed fail</string>
+    <string name="Delete_successfully">Removed successfuly</string>
     <string name="be_removing">Be removing</string>
     <string name="call_duration">call duration</string>
     <string name="Refused">Refused</string>
@@ -198,11 +209,7 @@
     <string name="temporary_does_not">Currently the video size greater than 10M is not supported!</string>
     <string name="Video_footage">Video record</string>
     <string name="User_name_cannot_be_empty">User name cannot be empty!</string>
-    <string name="User_name_cannot_be_wd">User name cannot be num alpha!</string>
-    <string name="upload_avatar_failed">upload_avatar_failed!</string>
-
-    <string name="cancel_register_failed">cancel_register_failed!</string>
-    <string name="Nick_name_cannot_be_empty">Nick name cannot be empty!</string>
+    <string name="User_name_cannot_be_wd">user name can be num,word！</string>
     <string name="Password_cannot_be_empty">Password cannot be empty!</string>
     <string name="please_set_the_current">"Please set the current user's nickname \ n to ios offline push not userid but Nick, see comments"</string>
     <string name="Is_landing">logining..</string>
@@ -218,22 +225,21 @@
     <string name="Logoff_notification">Logoff notification</string>
     <string name="Remove_the_notification">Remove the notification</string>
     <string name="Group_name_cannot_be_empty">Group name cannot be empty</string>
-    <string name="Group_name_existed">Group name existed</string>
     <string name="Is_to_create_a_group_chat">Creating the group</string>
     <string name="Failed_to_create_groups">Failed to create groups</string>
-    <string name="Create_groups_Success">Success to create groups</string>
-    <string name="Create_groups_Failed">Failed to create groups</string>
     <string name="The_video_to_start">The video to start</string>
     <string name="Whether_to_send">Are you sure to send?</string>
     <string name="Open_the_equipment_failure">Open the equipment failure!</string>
     <string name="Confirm_password_cannot_be_empty">Confirm password cannot be empty!</string>
     <string name="Two_input_password">Inconsistent password, please enter again!</string>
+    <string name="upload_avatar_failed">upload avatar failed!</string>
     <string name="Is_the_registered">Registering..</string>
     <string name="Registered_successfully">Registered successfully</string>
     <string name="network_anomalies">Network is not available, please check the network!</string>
     <string name="User_already_exists">User already existed!</string>
     <string name="registration_failed_without_permission">Registration failed, without permission!</string>
     <string name="Registration_failed">Registration failed:</string>
+    <string name="cancel_register_failed">cancel register failed</string>
     <string name="Are_logged_out">Logging out</string>
     <string name="Download_the_pictures">Download the pictures: 0%</string>
     <string name="Download_the_pictures_new">Download the pictures:</string>
@@ -292,7 +298,6 @@
     <string name="robot_chat">Robot chat</string>
     <string name="title_user_profile">User Profile</string>
     <string name="nickname">NickName</string>
-    <string name="photo">photo</string>
     <string name="dl_title_upload_photo">Upload Photo</string>
     <string name="dl_msg_local_upload">Local Upload</string>
     <string name="dl_msg_take_photo">Task Photo</string>
@@ -308,7 +313,16 @@
     <string name="toast_updatenick_fail">update nickname fail!</string>
     <string name="toast_updatephoto_success">update photo success!</string>
     <string name="toast_updatephoto_fail">update photo fail!</string>
+    <string name="Add_buddy_success">add buddy success</string>
+    <string name="Add_buddy_failed">add buddy failed</string>
+    <string name="Nick_name_cannot_be_empty">Nick name cannot be empty!</string>
+    <string name="Group_name_existed">Group name existed</string>
+    <string name="Create_groups_Success">Success to create groups</string>
+    <string name="Create_groups_Failed">Failed to create groups</string>
+    <string name="photo">photo</string>
+
     <string name="title_activity_good_details">GoodDetailsActivity</string>
+    <string name="title_good_details">Good Details</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_boutique_child">BoutiqueChildActivity</string>
@@ -335,5 +349,10 @@
     <string name="title_activity_pay_pal_un_synced_list">PayPalUnSyncedListActivity</string>
     <string name="share">share</string>
     <string name="user_qrcode">user qrcode</string>
+<<<<<<< HEAD
+=======
+    <string name="load_more">load more</string>
+    <string name="no_more">no more data!</string>
+>>>>>>> 4b1e1d7... 修改了新品的布局。刷新界面的Match改为Wrap。添加了上拉刷新和下拉刷新，以及在Adaptar中添加了排序方法，修改了Adaptar，曾佳了商品详情Activity和布局，添加了DisplayUtils，这个问题较多，注意复习
 
 </resources>

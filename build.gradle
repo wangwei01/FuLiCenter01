@@ -23,7 +23,7 @@ android {
 
     defaultConfig{
         applicationId "cn.ucai.fulicenter"
-        minSdkVersion 11
+        minSdkVersion 19
         targetSdkVersion 23
     }
     packagingOptions {
