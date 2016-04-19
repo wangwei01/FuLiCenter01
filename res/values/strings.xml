@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="spinnerarr">
-<item>按时间升序</item>
-<item>按时间降序</item>
-<item>按价格升序</item>
-<item>按价格降序</item>
+    <string-array name="spinnerarr">
+        <item>按时间升序</item>
+        <item>按时间降序</item>
+        <item>按价格升序</item>
+        <item>按价格降序</item>
 
-</string-array>
+    </string-array>
     <string name="app_name">FuLiCenter-AS</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
@@ -273,7 +273,7 @@
     <string name="dismiss_group">Dismiss group</string>
     <string name="add_public_group_chat">Add public group</string>
     <string name="gorup_not_found">Can not find this group</string>
-    <string name= "no_more_messages">no more messages</string>
+    <string name="no_more_messages">no more messages</string>
     <string name="join_public_group">Join public group</string>
     <string name="chatroom_allow_owner_leave">Allow chatroom owner leave</string>
     <string name="group_id">Group ID</string>
@@ -347,5 +347,8 @@
     <string name="user_qrcode">user qrcode</string>
     <string name="load_more">load more</string>
     <string name="no_more">no more data!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

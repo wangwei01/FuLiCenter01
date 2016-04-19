@@ -87,6 +87,20 @@
             android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
 
+        <activity
+            android:name="cn.ucai.fulicenter.activity.BoutiqueChildActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+
+        <activity
+            android:name="cn.ucai.fulicenter.activity.CategoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+
         <!-- 注册 -->
         <activity
             android:name="cn.ucai.fulicenter.activity.RegisterActivity"

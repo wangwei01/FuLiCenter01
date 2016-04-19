@@ -2,6 +2,7 @@ package cn.ucai.fulicenter.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.fragment.BoutiqueFragment;
+import cn.ucai.fulicenter.fragment.CategoryFragment;
 import cn.ucai.fulicenter.fragment.NewGoodFragment;
 
 /**
@@ -21,10 +24,12 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     RadioButton mrbCart;
     RadioButton mrbPersonCenter;
     int index;
-    int currentindex = -1;
+    int currentindex;
     RadioButton[] mRagioButtonArr;
 
     NewGoodFragment mNewGoodFragment;
+    BoutiqueFragment mBoutiqueFragment;
+    CategoryFragment mCategoryFragment;
     Fragment[] myFragmentArr=new Fragment[5];
 
     @Override
@@ -36,12 +41,21 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
         initView();
         initFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_contain, mNewGoodFragment)
-                .show(mNewGoodFragment).commit();
+                .add(R.id.fragment_contain,mBoutiqueFragment)
+                .hide(mBoutiqueFragment)
+                .add(R.id.fragment_contain,mCategoryFragment)
+                .hide(mCategoryFragment)
+                .show(mNewGoodFragment)
+                .commit();
     }
 
     private void initFragment() {
         mNewGoodFragment = new NewGoodFragment();
+        mBoutiqueFragment = new BoutiqueFragment();
+        mCategoryFragment = new CategoryFragment();
         myFragmentArr[0] = mNewGoodFragment;
+        myFragmentArr[1] = mBoutiqueFragment;
+        myFragmentArr[2] = mCategoryFragment;
     }
 
 
@@ -71,9 +85,6 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (index == -1) {
-            index=0;
-        }
         setDefaultchecked(index);
     }
 
@@ -119,9 +130,18 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
             index=4;
             break;
         }
+
+
         if (currentindex != index) {
-            currentindex = index;
-            setDefaultchecked(currentindex);
+            FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+            trx.hide(myFragmentArr[currentindex]);
+            if (!myFragmentArr[index].isAdded()) {
+                trx.add(R.id.fragment_container, myFragmentArr[index]);
+            }
+            trx.show(myFragmentArr[index]).commit();
         }
+
+        setDefaultchecked(index);
+        currentindex = index;
     }
 }

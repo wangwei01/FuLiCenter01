@@ -1,15 +1,11 @@
-package cn.ucai.fulicenter.fragment;
-
+package cn.ucai.fulicenter.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,18 +15,19 @@ import java.util.ArrayList;
 
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.activity.FuLiCenterMainActivity;
 import cn.ucai.fulicenter.adapter.GoodAdaptar;
 import cn.ucai.fulicenter.bean.NewGoodBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
 import cn.ucai.fulicenter.utils.Utils;
+import cn.ucai.fulicenter.view.DisplayUtils;
 
 /**
+ * Created by sks on 2016/4/19.
  */
-public class NewGoodFragment extends Fragment {
+public class BoutiqueChildActivity extends BaseActivity {
 
-    FuLiCenterMainActivity mContext;
+    BoutiqueChildActivity mContext;
     ArrayList<NewGoodBean> mGoodList = new ArrayList<>();
     private int Pageid = 0;
     private int action = I.ACTION_DOWNLOAD;
@@ -41,21 +38,17 @@ public class NewGoodFragment extends Fragment {
     GridLayoutManager mGridLayoutManager;
     GoodAdaptar mGoodAdaptar;
     Spinner mSpinner;
-
-    public NewGoodFragment() {
-
-    }
+    int catid;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mContext = (FuLiCenterMainActivity) getActivity();
-        View inflate = inflater.inflate(R.layout.fragment_new_good, container, false);
-        initView(inflate);
+    protected void onCreate(Bundle arg0) {
+        super.onCreate(arg0);
+        setContentView(R.layout.activity_boutique_child);
+        mContext = this;
+        initView();
         setListener();
         initDate();
-        return inflate;
     }
 
     private void setListener() {
@@ -66,7 +59,6 @@ public class NewGoodFragment extends Fragment {
     private void setPullUpDownRefreshListener() {
         mRecylerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             int lastItemPosition;
-
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -106,9 +98,10 @@ public class NewGoodFragment extends Fragment {
 
 
     private String getPath() {
+        catid = getIntent().getIntExtra(I.Boutique.ID, 0);
         try {
             String path = new ApiParams()
-                    .with(I.NewAndBoutiqueGood.CAT_ID, I.CAT_ID + "")
+                    .with(I.NewAndBoutiqueGood.CAT_ID, catid + "")
                     .with(I.PAGE_ID, Pageid + "")
                     .with(I.PAGE_SIZE, I.PAGE_SIZE_DEFAULT + "")
                     .getRequestUrl(I.REQUEST_FIND_NEW_BOUTIQUE_GOODS);
@@ -148,17 +141,18 @@ public class NewGoodFragment extends Fragment {
         };
     }
 
-    private void initView(View layout) {
-        mSwipeRefreshlayout = (SwipeRefreshLayout) layout.findViewById(R.id.srl_new_good);
+    private void initView() {
+        mSwipeRefreshlayout = (SwipeRefreshLayout) findViewById(R.id.srl_boutique_child);
         mSwipeRefreshlayout.setColorSchemeColors(
                 R.color.google_blue, R.color.google_green
                 , R.color.google_red, R.color.google_yellow
         );
-        mtvHint = (TextView) layout.findViewById(R.id.tv_refresh_hint);
-        mSpinner = (Spinner) layout.findViewById(R.id.spinner);
+        mtvHint = (TextView) findViewById(R.id.tv_refresh_hint);
+        String boutiqueChildName = getIntent().getStringExtra(I.Boutique.NAME);
+        DisplayUtils.initBackWithTitle(mContext,boutiqueChildName);
 
 
-        mRecylerView = (RecyclerView) layout.findViewById(R.id.rv_nowgood);
+        mRecylerView = (RecyclerView)findViewById(R.id.rv_boutique_child);
         mRecylerView.setHasFixedSize(true);
 
 
@@ -171,3 +165,5 @@ public class NewGoodFragment extends Fragment {
         mGoodAdaptar.notifyDataSetChanged();
     }
 }
+
+

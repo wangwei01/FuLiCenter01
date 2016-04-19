@@ -61,6 +61,11 @@ public class ImageUtils {
 		}
 		return file.getAbsolutePath();
 	}
+	public static void setBoutiqueThumb(String url, NetworkImageView imageView) {
+		imageView.setImageUrl(url, RequestManager.getImageLoader());
+		imageView.setDefaultImageResId(R.drawable.nopic);
+		imageView.setErrorImageResId(R.drawable.nopic);
+	}
 
 	public static void setNewGoodThumb(String thumb, NetworkImageView imageView) {
 		String url = FuLiCenterApplication.SERVER_ROOT + "?" + I.KEY_REQUEST

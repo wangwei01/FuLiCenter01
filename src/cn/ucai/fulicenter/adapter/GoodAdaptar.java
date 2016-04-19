@@ -105,7 +105,7 @@ public class GoodAdaptar extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mGoodList == null ? 0 : mGoodList.size()+1;
+        return mGoodList == null ? 1 : mGoodList.size()+1;
     }
 
     @Override
