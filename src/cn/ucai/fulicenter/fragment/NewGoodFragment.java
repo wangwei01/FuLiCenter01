@@ -85,7 +85,7 @@ public class NewGoodFragment extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastItemPosition = mGridLayoutManager.findLastVisibleItemPosition();
-                mSwipeRefreshlayout.setEnabled(mGridLayoutManager.findFirstVisibleItemPosition() == 0);
+                mSwipeRefreshlayout.setEnabled(mGridLayoutManager.findFirstCompletelyVisibleItemPosition() == 0);
             }
         });
     }

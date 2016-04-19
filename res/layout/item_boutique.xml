@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_boutique"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/niv_boutique"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:id="@+id/tv_introduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/niv_boutique"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="不一样asdsadsadsafdsafsafsa"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_introduction"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/niv_boutique"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="不一样asdsadsadsafdsafsafsa"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_text"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/niv_boutique"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="不一样asdsadsadsafdsafsafsa"
+        android:textSize="20sp" />
+</RelativeLayout>
