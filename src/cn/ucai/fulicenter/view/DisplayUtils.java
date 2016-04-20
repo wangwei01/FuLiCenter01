@@ -19,12 +19,13 @@ public class DisplayUtils {
         LinearLayout clickArea = (LinearLayout) activity.findViewById(R.id.backClickArea);
 
         clickArea.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.finish();
-                }
-            });
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
     }
+
 
     public static void initBackWithTitle(final Activity activity, String title) {
         TextView tvTitle = (TextView) activity.findViewById(R.id.tv_head_title);

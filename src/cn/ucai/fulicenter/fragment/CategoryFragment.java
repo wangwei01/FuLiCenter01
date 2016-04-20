@@ -33,6 +33,7 @@ public class CategoryFragment extends Fragment {
     ArrayList<ArrayList<CategoryChildBean>> mChildList;
     CategoryAdaptar mcategoryAdapter;
     FuLiCenterMainActivity mContext;
+    int groupsize;
 
 
 
@@ -56,12 +57,7 @@ public class CategoryFragment extends Fragment {
         try {
             final String path = new ApiParams()
                     .getRequestUrl(I.REQUEST_FIND_CATEGORY_GROUP);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
                     mContext.executeRequest(new GsonRequest<CategoryGroupBean[]>(path, CategoryGroupBean[].class, responDownLoadcateGroupbeanListener(),mContext.errorListener()));
-                }
-            }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +72,7 @@ public class CategoryFragment extends Fragment {
                     ArrayList<CategoryGroupBean> categoryGrouplist = Utils.array2List(categoryGroupBeen);
                     mGroupList = categoryGrouplist;
                         for(int i=0;i<categoryGrouplist.size();i++) {
+                            mChildList.add(i,new ArrayList<CategoryChildBean>());
                             CategoryGroupBean groupBean = categoryGrouplist.get(i);
                             int parentid=groupBean.getId();
                             try {
@@ -83,12 +80,7 @@ public class CategoryFragment extends Fragment {
                                         .with(I.PAGE_ID, I.PAGE_ID_DEFAULT + "").with(I.PAGE_SIZE, I.PAGE_SIZE_DEFAULT + "")
                                         .with(I.CategoryChild.PARENT_ID, parentid + "")
                                         .getRequestUrl(I.REQUEST_FIND_CATEGORY_CHILDREN);
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mContext.executeRequest(new GsonRequest<CategoryChildBean[]>(path,CategoryChildBean[].class,responseChilBeanListener(),mContext.errorListener()));
-                                    }
-                                }).start();
+                                        mContext.executeRequest(new GsonRequest<CategoryChildBean[]>(path,CategoryChildBean[].class,responseChilBeanListener(i),mContext.errorListener()));
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -99,13 +91,19 @@ public class CategoryFragment extends Fragment {
         };
     }
 
-    private Response.Listener<CategoryChildBean[]> responseChilBeanListener() {
+    private Response.Listener<CategoryChildBean[]> responseChilBeanListener(final int i) {
         return new Response.Listener<CategoryChildBean[]>() {
             @Override
             public void onResponse(CategoryChildBean[] categoryChildBeen) {
-                ArrayList<CategoryChildBean> categoryChildBeen1 = Utils.array2List(categoryChildBeen);
-                mChildList.add(categoryChildBeen1);
-                if (mGroupList.size() == mChildList.size()) {
+                groupsize++;
+                if (categoryChildBeen != null) {
+                    ArrayList<CategoryChildBean> categoryChildBeen1 = Utils.array2List(categoryChildBeen);
+                    if (categoryChildBeen1 != null) {
+                        mChildList.set(i, categoryChildBeen1);
+                    }
+                }
+                // mChildList.add(categoryChildBeen1);
+                if (mGroupList.size() ==groupsize/*mChildList.size()*/) {
                     mcategoryAdapter.addiTems(mGroupList, mChildList);
                 }
             }

@@ -6,66 +6,61 @@
     <RelativeLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:background="@color/good_detail_title_bg">
-        <LinearLayout
-            android:id="@+id/backClickArea"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+        <include layout="@layout/common_head_emptytitle"/>
 
-            <ImageView
-                android:id="@+id/headLeftMenu"
-                android:layout_gravity="center"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:scaleType="fitStart"
-                android:adjustViewBounds="true"
-                android:src="@drawable/back"/>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_category"
+        <cn.ucai.fulicenter.view.CatChildFilterButton
+            android:id="@+id/btn_catChildFilterButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/backClickArea"
-            android:text="分类"
-            android:textSize="30sp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:drawableRight="@drawable/arrow2_up"
+            android:text="分类"
+            android:background="@null"
             />
-        <TextView
-            android:id="@+id/tv_collect"
+        <cn.ucai.fulicenter.view.ColorFilterButton
+            android:id="@+id/btn_colorFilterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="收藏"
-            android:textSize="30sp"
             android:layout_centerVertical="true"
+            android:text="筛选"
+            android:background="#f90"
             />
 
     </RelativeLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:orientation="horizontal"
+        android:background="@color/main_orange2"
         >
+
         <Button
-            android:id="@+id/btn_price"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_price_sort"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="按价格分类"/>
+            android:drawableRight="@drawable/arrow_order_down"
+            android:background="@null"
+            android:text="价格"
+            />
+
         <Button
-            android:id="@+id/btn_addtime"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_addtime_sort"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/btn_price"
-            android:text="按添加时间分类"
+            android:drawableRight="@drawable/arrow_order_down"
+            android:text="时间"
+            android:background="@null"
             />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_category"
