@@ -13,6 +13,7 @@ import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.fragment.CategoryFragment;
 import cn.ucai.fulicenter.fragment.NewGoodFragment;
+import cn.ucai.fulicenter.fragment.PersonCenterFragment;
 
 /**
  * Created by sks on 2016/4/16.
@@ -30,6 +31,7 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     NewGoodFragment mNewGoodFragment;
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
+    PersonCenterFragment mPersonCenterFragment;
     Fragment[] myFragmentArr=new Fragment[5];
 
     @Override
@@ -41,10 +43,12 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
         initView();
         initFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_contain, mNewGoodFragment)
-                .add(R.id.fragment_contain,mBoutiqueFragment)
+                .add(R.id.fragment_contain, mBoutiqueFragment)
                 .hide(mBoutiqueFragment)
-                .add(R.id.fragment_contain,mCategoryFragment)
+                .add(R.id.fragment_contain, mCategoryFragment)
                 .hide(mCategoryFragment)
+                .add(R.id.fragment_contain, mPersonCenterFragment)
+                .hide(mPersonCenterFragment)
                 .show(mNewGoodFragment)
                 .commit();
     }
@@ -53,9 +57,11 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
         mNewGoodFragment = new NewGoodFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
+        mPersonCenterFragment = new PersonCenterFragment();
         myFragmentArr[0] = mNewGoodFragment;
         myFragmentArr[1] = mBoutiqueFragment;
         myFragmentArr[2] = mCategoryFragment;
+        myFragmentArr[4] = mPersonCenterFragment;
     }
 
 
