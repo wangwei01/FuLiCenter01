@@ -34,17 +34,20 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        final String username = FuLiCenterApplication.getInstance().getUserName();
+        if (DemoHXSDKHelper.getInstance().isLogined()) {
+            new DownLoadContactTask(mcontext, username, 0, 20).execute();
+            new DownLoadContactListTask(mcontext, username, 0, 20).execute();
+        }
         new Thread(new Runnable() {
             public void run() {
                 if (DemoHXSDKHelper.getInstance().isLogined()) {
-                    String username = FuLiCenterApplication.getInstance().getUserName();
 
                     UserDao dao = new UserDao(mcontext);
                     UserBean userbean = dao.findUserByUserName(username);
                     FuLiCenterApplication.getInstance().setUser(userbean);
 
-                    new DownLoadContactTask(mcontext, username, 0, 20).execute();
-                    new DownLoadContactListTask(mcontext, username, 0, 20).execute();
 
 					/*// ** 免登陆情况 加载所有本地群和会话
 					//不是必须的，不加sdk也会自动异步去加载(不会重复加载)；

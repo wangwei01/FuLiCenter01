@@ -46,6 +46,7 @@ import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
+import cn.ucai.fulicenter.bean.MessageBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
@@ -77,6 +78,7 @@ public class LoginActivity extends BaseActivity {
     private String currentUsername;
     private String currentPassword;
     private Activity mContext;
+    String action;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class LoginActivity extends BaseActivity {
         // 如果用户名密码都有，直接进入主页面
         if (DemoHXSDKHelper.getInstance().isLogined()) {
             autoLogin = true;
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, FuLiCenterMainActivity.class).putExtra("action",action));
 
             return;
         }
@@ -224,8 +226,18 @@ public class LoginActivity extends BaseActivity {
                     String avatar = FuLiCenterApplication.getInstance().getUser().getAvatar();
                     File file = OnSetAvatarListener.getAvatarFile(mContext, avatar);
                     NetUtil.downloadAvatar(file, "user_avatar", avatar);
+
                 }
             }).start();
+
+            try {
+                final String path = new ApiParams()
+                        .with(I.User.USER_NAME, currentUsername)
+                        .getRequestUrl(I.REQUEST_FIND_COLLECT_COUNT);
+                executeRequest(new GsonRequest<MessageBean>(path,MessageBean.class,responseCollectionListener(),errorListener()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             runOnUiThread(new Runnable() {
                 @Override
@@ -263,10 +275,23 @@ public class LoginActivity extends BaseActivity {
         }
         // 进入主页面
         Intent intent = new Intent(LoginActivity.this,
-                MainActivity.class);
+                FuLiCenterMainActivity.class).putExtra("action",action);
         startActivity(intent);
 
         finish();
+    }
+
+    private Response.Listener<MessageBean> responseCollectionListener() {
+        return new Response.Listener<MessageBean>() {
+            @Override
+            public void onResponse(MessageBean messageBean) {
+                if (messageBean != null) {
+                    Intent intent = new Intent("collection_num");
+                    intent.putExtra("num", messageBean.getMsg());
+                    sendBroadcast(intent);
+                }
+            }
+        };
     }
 
 
@@ -427,6 +452,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        action = getIntent().getStringExtra("action");
         if (autoLogin) {
             return;
         }

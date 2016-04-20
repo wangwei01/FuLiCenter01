@@ -108,6 +108,12 @@
             android:theme="@style/horizontal_slide" 
             android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
+        <activity
+            android:name="cn.ucai.fulicenter.activity.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
         <!-- 聊天页面 -->
         <activity
             android:name="cn.ucai.fulicenter.activity.ChatActivity"
@@ -321,7 +327,8 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="wangwei001#superwechat" />
+            android:value="i#fulicenter" />
+        <!--wangwei001#superwechat-->
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService"/>
         <!-- 声明sdk所需的receiver -->

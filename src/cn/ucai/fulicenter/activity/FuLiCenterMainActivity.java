@@ -1,15 +1,15 @@
 package cn.ucai.fulicenter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
+import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.fragment.BoutiqueFragment;
 import cn.ucai.fulicenter.fragment.CategoryFragment;
 import cn.ucai.fulicenter.fragment.NewGoodFragment;
@@ -33,6 +33,9 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     CategoryFragment mCategoryFragment;
     PersonCenterFragment mPersonCenterFragment;
     Fragment[] myFragmentArr=new Fragment[5];
+
+    String action;
+    UserBean currentuser;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -65,7 +68,7 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
     }
 
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_cart_hint, menu);
@@ -85,13 +88,20 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 
     @Override
     protected void onResume() {
         super.onResume();
         setDefaultchecked(index);
+        setFragment();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        action = getIntent().getStringExtra("action");
     }
 
     private void setDefaultchecked(int index) {
@@ -133,10 +143,49 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
             index=3;
             break;
             case R.id.layout_Personal_Center:
-            index=4;
+                currentuser = FuLiCenterApplication.getInstance().getUser();
+                if (currentuser != null) {
+                    index = 4;
+                } else {
+                    gotoLogin("person");
+                }
             break;
         }
 
+
+        if (currentindex != index) {
+            FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+            trx.hide(myFragmentArr[currentindex]);
+            if (!myFragmentArr[index].isAdded()) {
+                trx.add(R.id.fragment_container, myFragmentArr[index]);
+            }
+            trx.show(myFragmentArr[index]).commit();
+        }
+
+        setDefaultchecked(index);
+        currentindex = index;
+    }
+
+    private void gotoLogin(String person) {
+        Intent intent = new Intent(FuLiCenterMainActivity.this, LoginActivity.class);
+        intent.putExtra("action", person);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        action = intent.getStringExtra("action");
+    }
+
+    private void setFragment() {
+        currentuser = FuLiCenterApplication.getInstance().getUser();
+        action = getIntent().getStringExtra("action");
+        if (action != null && action.equals("person") && currentuser != null) {
+            index=4;
+            action = "";
+        }
 
         if (currentindex != index) {
             FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
