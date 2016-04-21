@@ -13,7 +13,6 @@
  */
 package cn.ucai.fulicenter.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -46,7 +45,6 @@ import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.applib.controller.HXSDKHelper;
-import cn.ucai.fulicenter.bean.MessageBean;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.data.ApiParams;
 import cn.ucai.fulicenter.data.GsonRequest;
@@ -54,12 +52,14 @@ import cn.ucai.fulicenter.db.EMUserDao;
 import cn.ucai.fulicenter.db.UserDao;
 import cn.ucai.fulicenter.domain.User;
 import cn.ucai.fulicenter.listener.OnSetAvatarListener;
+import cn.ucai.fulicenter.task.DownLoadCollectCountTask;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
 import cn.ucai.fulicenter.utils.CommonUtils;
 import cn.ucai.fulicenter.utils.MD5;
 import cn.ucai.fulicenter.utils.NetUtil;
 import cn.ucai.fulicenter.utils.Utils;
+import cn.ucai.fulicenter.view.DisplayUtils;
 
 /**
  * 登陆页面
@@ -77,7 +77,7 @@ public class LoginActivity extends BaseActivity {
 
     private String currentUsername;
     private String currentPassword;
-    private Activity mContext;
+    private LoginActivity mContext;
     String action;
 
     @Override
@@ -98,6 +98,8 @@ public class LoginActivity extends BaseActivity {
 
         mContext = this;
         setListener();
+
+        DisplayUtils.initBackWithTitle(mContext,"登录");
 
         if (FuLiCenterApplication.getInstance().getUserName() != null) {
             usernameEditText.setText(FuLiCenterApplication.getInstance().getUserName());
@@ -220,6 +222,10 @@ public class LoginActivity extends BaseActivity {
             File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             File file=new File(dir,avatarName);
             NetUtil.downloadAvatar(file, null, avatarName );*/
+
+            Intent intent = new Intent("update_user");
+            sendBroadcast(intent);
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -230,14 +236,7 @@ public class LoginActivity extends BaseActivity {
                 }
             }).start();
 
-            try {
-                final String path = new ApiParams()
-                        .with(I.User.USER_NAME, currentUsername)
-                        .getRequestUrl(I.REQUEST_FIND_COLLECT_COUNT);
-                executeRequest(new GsonRequest<MessageBean>(path,MessageBean.class,responseCollectionListener(),errorListener()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
 
             runOnUiThread(new Runnable() {
                 @Override
@@ -246,8 +245,7 @@ public class LoginActivity extends BaseActivity {
                     new DownLoadContactTask(mContext, currentUsername, 0, 20).execute();
                     //下载好友列表
                     new DownLoadContactListTask(mContext,currentUsername,0,20).execute();
-
-
+                    new DownLoadCollectCountTask(mContext).execute();
                 }
             });
             // 处理好友和群组
@@ -268,31 +266,19 @@ public class LoginActivity extends BaseActivity {
         boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(
                 FuLiCenterApplication.currentUserNick.trim());
         if (!updatenick) {
-            Log.e("LoginActivity", "update current user nick fail");
         }
         if (!LoginActivity.this.isFinishing() && pd.isShowing()) {
             pd.dismiss();
         }
         // 进入主页面
-        Intent intent = new Intent(LoginActivity.this,
-                FuLiCenterMainActivity.class).putExtra("action",action);
-        startActivity(intent);
-
+        if (action!=null) {
+            Intent intent = new Intent(LoginActivity.this,
+                    FuLiCenterMainActivity.class).putExtra("action",action);
+            startActivity(intent);
+        }
         finish();
     }
 
-    private Response.Listener<MessageBean> responseCollectionListener() {
-        return new Response.Listener<MessageBean>() {
-            @Override
-            public void onResponse(MessageBean messageBean) {
-                if (messageBean != null) {
-                    Intent intent = new Intent("collection_num");
-                    intent.putExtra("num", messageBean.getMsg());
-                    sendBroadcast(intent);
-                }
-            }
-        };
-    }
 
 
     private void loginAppServer() {

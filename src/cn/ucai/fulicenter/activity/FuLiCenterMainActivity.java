@@ -98,6 +98,8 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
         setFragment();
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -184,7 +186,8 @@ public class FuLiCenterMainActivity  extends  BaseActivity {
         action = getIntent().getStringExtra("action");
         if (action != null && action.equals("person") && currentuser != null) {
             index=4;
-            action = "";
+            //action = "";
+            getIntent().removeExtra("action");
         }
 
         if (currentindex != index) {

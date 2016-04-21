@@ -217,6 +217,12 @@ public interface I {
     public static final String REQUEST_REGISTER = "register";
 
     /**
+     * 添加和取消收藏
+     */
+    final static int ACTION_ADD_COLLECTION=1;
+    final static int ACTION_DELETE_COLLECTION=2;
+
+    /**
      * 发送取消注册的请求
      */
     public static final String REQUEST_UNREGISTER = "unregister";

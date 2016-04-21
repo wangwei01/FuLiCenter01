@@ -11,6 +11,7 @@ import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.db.UserDao;
+import cn.ucai.fulicenter.task.DownLoadCollectCountTask;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
 
@@ -39,6 +40,7 @@ public class SplashActivity extends BaseActivity {
         if (DemoHXSDKHelper.getInstance().isLogined()) {
             new DownLoadContactTask(mcontext, username, 0, 20).execute();
             new DownLoadContactListTask(mcontext, username, 0, 20).execute();
+            new DownLoadCollectCountTask(mcontext).execute();
         }
         new Thread(new Runnable() {
             public void run() {
@@ -47,6 +49,9 @@ public class SplashActivity extends BaseActivity {
                     UserDao dao = new UserDao(mcontext);
                     UserBean userbean = dao.findUserByUserName(username);
                     FuLiCenterApplication.getInstance().setUser(userbean);
+
+                    Intent intent = new Intent("update_user");
+                    sendBroadcast(intent);
 
 
 					/*// ** 免登陆情况 加载所有本地群和会话

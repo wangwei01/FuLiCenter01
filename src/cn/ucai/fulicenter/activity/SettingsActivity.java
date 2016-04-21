@@ -362,7 +362,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
 						intance.getContactList().clear();
 						intance.getUserList().clear();
 						intance.getContacts().clear();
-
+						intance.setUser(null);
 						pd.dismiss();
 						// 重新显示登陆页面
 						finish();

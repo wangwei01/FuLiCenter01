@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginTop="5dp"
+    android:weightSum="1"
+    android:id="@+id/layout_collect_good"
+    >
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_gravity="right"
+        />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/niv_collect_thumb"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/nopic"
+        android:layout_weight="0.42"
+        />
+    <TextView
+        android:id="@+id/tv_collect_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品"
+        android:textColor="@color/item_good_text"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+</LinearLayout>

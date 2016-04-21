@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class CollectBean  implements Serializable {
     private int id;
 
-    private int userName;
+    private String userName;
 
     private int goodsId;
 
@@ -20,12 +20,12 @@ public class CollectBean  implements Serializable {
 
     private String goodsImg;
 
-    private int addTime;
+    private long addTime;
 
     public CollectBean() {
     }
 
-    public CollectBean(int userName, int goodsId, String goodsName, String goodsEnglishName, String goodsThumb, String goodsImg, int addTime) {
+    public CollectBean(String userName, int goodsId, String goodsName, String goodsEnglishName, String goodsThumb, String goodsImg, long addTime) {
         this.userName = userName;
         this.goodsId = goodsId;
         this.goodsName = goodsName;
@@ -41,10 +41,10 @@ public class CollectBean  implements Serializable {
     public int getId(){
         return this.id;
     }
-    public void setUserName(int userName){
+    public void setUserName(String userName){
         this.userName = userName;
     }
-    public int getUserName(){
+    public String getUserName(){
         return this.userName;
     }
     public void setGoodsId(int goodsId){
@@ -77,10 +77,10 @@ public class CollectBean  implements Serializable {
     public String getGoodsImg(){
         return this.goodsImg;
     }
-    public void setAddTime(int addTime){
+    public void setAddTime(long addTime){
         this.addTime = addTime;
     }
-    public int getAddTime(){
+    public long getAddTime(){
         return this.addTime;
     }
 
