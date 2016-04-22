@@ -1,6 +1,9 @@
 package cn.ucai.fulicenter.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +66,9 @@ public class GoodDetailsActivity extends BaseActivity {
     TextView tvCurrencyPrice;
     WebView wvGoodBrief;
 
+    CartChangedReceiver mCartChangedReceiver;
+
+
     /**
      * 当前的颜色值
      */
@@ -81,10 +87,23 @@ public class GoodDetailsActivity extends BaseActivity {
         initView();
         initData();
         setListener();
+
+        registerCartChangedReceiver();
     }
 
     private void setListener() {
         mivCollect.setOnClickListener(new setCollectOnclickListener());
+        setAddcartClickListener();
+
+    }
+
+    private void setAddcartClickListener() {
+        mivAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.addCart(mContext, mGoodDetails);
+            }
+        });
     }
 
     class setCollectOnclickListener implements View.OnClickListener {
@@ -267,6 +286,37 @@ public class GoodDetailsActivity extends BaseActivity {
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setBuiltInZoomControls(true);
 
+        mtvCartCount = (TextView) findViewById(R.id.tvCartCount);
 
+
+    }
+
+
+    class CartChangedReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int count = Utils.sumCartCount();
+            if (count > 0) {
+                mtvCartCount.setText("" + count);
+                mtvCartCount.setVisibility(View.VISIBLE);
+            } else {
+                mtvCartCount.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void registerCartChangedReceiver() {
+        mCartChangedReceiver = new CartChangedReceiver();
+        IntentFilter filter = new IntentFilter("update_cart");
+        mContext.registerReceiver(mCartChangedReceiver,filter);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mCartChangedReceiver != null) {
+            mContext.unregisterReceiver(mCartChangedReceiver);
+        }
     }
 }

@@ -37,6 +37,7 @@ import cn.ucai.fulicenter.listener.OnSetAvatarListener;
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.utils.NetUtil;
 import cn.ucai.fulicenter.utils.Utils;
+import cn.ucai.fulicenter.view.DisplayUtils;
 
 /**
  * 注册页
@@ -68,6 +69,7 @@ public class RegisterActivity extends BaseActivity {
 		confirmPwdEditText = (EditText) findViewById(R.id.confirm_password);
 		metNick = (EditText) findViewById(R.id.nick);
 		mivAvatar = (ImageView) findViewById(R.id.iv_avatar);
+		DisplayUtils.initBackWithTitle(mContext,"账户注册");
 	}
 
 	private void setListener() {

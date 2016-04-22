@@ -11,6 +11,7 @@ import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.bean.UserBean;
 import cn.ucai.fulicenter.db.UserDao;
+import cn.ucai.fulicenter.task.DownLoadCartListTask;
 import cn.ucai.fulicenter.task.DownLoadCollectCountTask;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
@@ -41,6 +42,9 @@ public class SplashActivity extends BaseActivity {
             new DownLoadContactTask(mcontext, username, 0, 20).execute();
             new DownLoadContactListTask(mcontext, username, 0, 20).execute();
             new DownLoadCollectCountTask(mcontext).execute();
+            new DownLoadCartListTask(mcontext, username, 0, 20).execute();
+            Intent intent = new Intent("update_cart");
+            mcontext.sendStickyBroadcast(intent);
         }
         new Thread(new Runnable() {
             public void run() {

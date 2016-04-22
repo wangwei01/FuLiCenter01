@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class PersonCenterFragment extends Fragment {
     TextView mtvUserName;
     TextView mtvCollectionNum;
     TextView mtvSetUp;
+    ImageView mtvPersonMsg;
     RelativeLayout  mRelativeLayout;
     FuLiCenterMainActivity mContext;
     CollectionNumReceiver mCollectionNumReceiver;
@@ -60,6 +62,16 @@ public class PersonCenterFragment extends Fragment {
         return layout;
     }
 
+
+    private void initView(View layout) {
+        mnivAvatar = (NetworkImageView) layout.findViewById(R.id.iv_person_avatar);
+        mtvUserName = (TextView) layout.findViewById(R.id.tv_username);
+        mtvCollectionNum = (TextView) layout.findViewById(R.id.tv_collection_num);
+        mtvSetUp = (TextView) layout.findViewById(R.id.tv_set_up);
+        mRelativeLayout = (RelativeLayout) layout.findViewById(R.id.relayout_collection);
+        mtvPersonMsg = (ImageView) layout.findViewById(R.id.iv_person_center_msg);
+    }
+
     private void registerUpdateUserReceiver() {
         mUpdateUserReceiver = new UpdateUserReceiver();
         IntentFilter filter = new IntentFilter();
@@ -68,21 +80,30 @@ public class PersonCenterFragment extends Fragment {
     }
 
     private void setListener() {
-        mtvSetUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
+        mtvSetUp.setOnClickListener(new MyClickListener());
+        mRelativeLayout.setOnClickListener(new MyClickListener());
+        mnivAvatar.setOnClickListener(new MyClickListener());
+        mtvUserName.setOnClickListener(new MyClickListener());
+    }
 
-        mRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CollectActivity.class);
-                startActivity(intent);
+    class MyClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.relayout_collection:
+                    Intent intent1 = new Intent(mContext, CollectActivity.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.tv_set_up:
+                case R.id.iv_person_avatar:
+                case R.id.tv_username:
+                    Intent intent = new Intent(mContext, SettingsActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.iv_person_center_msg:
+                    break;
             }
-        });
+        }
     }
 
     private void registerCollectionNumReceiver() {
@@ -104,14 +125,7 @@ public class PersonCenterFragment extends Fragment {
 
 
 
-    private void initView(View layout) {
-        mnivAvatar = (NetworkImageView) layout.findViewById(R.id.iv_person_avatar);
-        mtvUserName = (TextView) layout.findViewById(R.id.tv_username);
-        mtvCollectionNum = (TextView) layout.findViewById(R.id.tv_collection_num);
-        mtvSetUp = (TextView) layout.findViewById(R.id.tv_set_up);
-        mRelativeLayout = (RelativeLayout) layout.findViewById(R.id.relayout_collection);
 
-    }
 
     class UpdateUserReceiver extends BroadcastReceiver {
         @Override

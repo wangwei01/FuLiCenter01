@@ -32,4 +32,22 @@ public class DisplayUtils {
         tvTitle.setText(title);
         initBack(activity);
     }
+
+    /*public static void initBackWithTitle2(final Activity activity, String title) {
+        TextView tvTitle = (TextView) activity.findViewById(R.id.tv_head_title);
+        tvTitle.setText(title);
+        initBack2(activity);
+    }
+
+    public static void initBack2(final Activity activity) {
+        LinearLayout clickArea = (LinearLayout) activity.findViewById(R.id.backClickArea);
+
+        clickArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(new Intent(activity, BoutiqueChildActivity.class));
+                //activity.finish();
+            }
+        });
+    }*/
 }

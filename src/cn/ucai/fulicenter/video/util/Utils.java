@@ -1,8 +1,5 @@
 package cn.ucai.fulicenter.video.util;
 
-import java.util.Comparator;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
@@ -10,6 +7,9 @@ import android.hardware.Camera.Size;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.StrictMode;
+
+import java.util.Comparator;
+import java.util.List;
 
 import cn.ucai.fulicenter.activity.ImageGridActivity;
 
@@ -87,10 +87,5 @@ public class Utils {
 			else
 			return lhs.width-rhs.width;
 		}
-		 
 	}
-	
-	
-	
-	
 }

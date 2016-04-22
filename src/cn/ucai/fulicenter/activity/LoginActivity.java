@@ -52,6 +52,7 @@ import cn.ucai.fulicenter.db.EMUserDao;
 import cn.ucai.fulicenter.db.UserDao;
 import cn.ucai.fulicenter.domain.User;
 import cn.ucai.fulicenter.listener.OnSetAvatarListener;
+import cn.ucai.fulicenter.task.DownLoadCartListTask;
 import cn.ucai.fulicenter.task.DownLoadCollectCountTask;
 import cn.ucai.fulicenter.task.DownLoadContactListTask;
 import cn.ucai.fulicenter.task.DownLoadContactTask;
@@ -246,6 +247,9 @@ public class LoginActivity extends BaseActivity {
                     //下载好友列表
                     new DownLoadContactListTask(mContext,currentUsername,0,20).execute();
                     new DownLoadCollectCountTask(mContext).execute();
+                    new DownLoadCartListTask(mContext, currentUsername, 0, 20).execute();
+                    Intent intent = new Intent("update_cart");
+                    mContext.sendStickyBroadcast(intent);
                 }
             });
             // 处理好友和群组

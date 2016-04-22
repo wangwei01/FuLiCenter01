@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.task;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -48,7 +49,7 @@ public class DownLoadCartListTask extends BaseActivity {
 
     public void execute() {
 
-        executeRequest(new GsonRequest<CartBean[]>(path,CartBean[].class,responseListener(),errorListener()));
+        executeRequest(new GsonRequest<CartBean[]>(path, CartBean[].class, responseListener(), errorListener()));
     }
 
     private Response.Listener<CartBean[]> responseListener() {
@@ -56,38 +57,46 @@ public class DownLoadCartListTask extends BaseActivity {
             @Override
             public void onResponse(CartBean[] cartArray) {
                 Log.e("main", "responseListener" + cartArray);
-                if(cartArray==null){
+                if (cartArray == null) {
                     return;
                 }
-                ArrayList<CartBean> cartbeanlist= Utils.array2List(cartArray);
-                ArrayList<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
+                final ArrayList<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
+                ArrayList<CartBean> cartbeanlist = Utils.array2List(cartArray);
 
-                cartList.clear();
-                cartList.addAll(cartbeanlist);
+                for (int i = 0; i < cartbeanlist.size(); i++) {
+                    CartBean cartBean = cartbeanlist.get(i);
+                    if (!cartList.contains(cartBean)) {
+                        cartList.add(cartBean);
+                        try {
+                            String path = new ApiParams()
+                                    .with(I.Cart.GOODS_ID, cartBean.getGoodsId() + "")
+                                    .getRequestUrl(I.REQUEST_FIND_GOOD_DETAILS);
+                            executeRequest(new GsonRequest<GoodDetailsBean>(path, GoodDetailsBean.class, new Response.Listener<GoodDetailsBean>() {
+                                @Override
+                                public void onResponse(GoodDetailsBean goodDetailsBean) {
+                                    if (goodDetailsBean != null) {
+                                        for (int i = 0; i < cartList.size(); i++) {
+                                            if (cartList.get(i).getGoodsId() == goodDetailsBean.getGoodsId()) {
+                                                cartList.get(i).setGoods(goodDetailsBean);
+                                                Intent intent = new Intent("update_cart");
+                                                mContext.sendStickyBroadcast(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            }, errorListener()));
 
+                            Intent intent = new Intent("update_cart");
+                            mContext.sendStickyBroadcast(intent);
 
-                for (CartBean cartBean : cartbeanlist) {
-                    int goodsId = cartBean.getGoodsId();
-                    try {
-                        String path=new ApiParams()
-                                .with(I.Cart.GOODS_ID,goodsId+"")
-                                .getRequestUrl(I.REQUEST_FIND_GOOD_DETAILS);
-                        executeRequest(new GsonRequest<GoodDetailsBean[]>(path,GoodDetailsBean[].class,responseGoodDetailsBeanListener(),errorListener()));
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         };
     }
-
-    private Response.Listener<GoodDetailsBean[]> responseGoodDetailsBeanListener() {
-        return new Response.Listener<GoodDetailsBean[]>() {
-            @Override
-            public void onResponse(GoodDetailsBean[] goodDetailsBeen) {
-
-            }
-        };
-    }
 }
+
+

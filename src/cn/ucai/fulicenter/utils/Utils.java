@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.easemob.chat.EMMessage;
@@ -10,7 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.ucai.fulicenter.FuLiCenterApplication;
+import cn.ucai.fulicenter.bean.CartBean;
+import cn.ucai.fulicenter.bean.GoodDetailsBean;
 import cn.ucai.fulicenter.bean.UserBean;
+import cn.ucai.fulicenter.task.UpdateCartTask;
 
 /**
  * Created by clawpo on 16/3/28.
@@ -92,5 +96,63 @@ public class Utils {
     public static int dp2px(Context context,int dp) {
         int  density = (int) context.getResources().getDisplayMetrics().density;
         return density/dp;
+    }
+
+
+    public static void addCart(Context mContext, GoodDetailsBean goods) {
+        boolean isexist=false;
+        String userName = null;
+        UserBean user = FuLiCenterApplication.getInstance().getUser();
+        if (user != null) {
+            userName = user.getUserName();
+        } else {
+            userName = "";
+        }
+        ArrayList<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
+        int goodsId = goods.getGoodsId();
+        CartBean cart = null;
+        for(int i=0;i<cartList.size()&&!isexist;i++) {
+            if (goodsId == cartList.get(i).getGoodsId()) {
+                int count = cartList.get(i).getCount();
+                cartList.get(i).setCount(++count);
+                cart = cartList.get(i);
+                isexist = true;
+            }
+        }
+
+        if (!isexist) {
+            cart = new CartBean(0, userName, goods.getGoodsId(), 1, true);
+        }
+
+        Log.i("main", "addCart" + cart.getCount());
+        new UpdateCartTask(mContext,cart).execute();
+    }
+
+
+    public static void DeleteCaet(Context mContext, GoodDetailsBean goods) {
+        boolean isexist = false;
+        CartBean cartBean = null;
+        ArrayList<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
+        int goodsId = goods.getGoodsId();
+        for(int i=0;i<cartList.size()&&!isexist;i++) {
+            if (goodsId == cartList.get(i).getGoodsId()) {
+                int count = cartList.get(i).getCount();
+                cartList.get(i).setCount(count - 1);
+                cartBean = cartList.get(i);
+                isexist = true;
+            }
+        }
+        if (isexist) {
+            new UpdateCartTask(mContext, cartBean).execute();
+        }
+    }
+
+    public static int  sumCartCount() {
+        ArrayList<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
+        int count=0;
+        for(int i=0;i<cartList.size();i++) {
+            count += cartList.get(i).getCount();
+        }
+        return count;
     }
 }
